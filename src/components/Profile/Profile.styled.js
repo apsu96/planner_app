@@ -10,6 +10,7 @@ export const ProfileContainer = styled.div`
     disply: flex;
     flex-direction: column;
     min-height: 100vh;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
 `
 
 export const AvatarUsernameContainer = styled.div`
