@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
 
 export const ProfileContainer = styled.div`
     background: white;
@@ -17,9 +18,6 @@ export const AvatarUsernameContainer = styled.div`
     width: 100%;
     gap: 20px;
     margin-top: 60px;
-`
-
-export const UsernameContainer = styled.div`
 `
 
 export const Username = styled.p`
@@ -44,28 +42,41 @@ export const MenuContainer = styled.div`
     display: flex;
     flex-direction: column;
     margin-top: 60px;
-    gap: 16px;
 `
 
-export const MenuItem = styled.button`
+export const MenuItem = styled(Link)`
     background: transparent;
-    color: #53514D;
+    color: ${({ color }) => {
+        if (color === 'selected') {
+            return '#AA84A1'
+        }
+        return '#53514D'
+    }};
     font-family: OpenSans, sans-serif;
     font-weight: 600;
     font-size: 14px;
-    line-height: 19px;
+    line-height: 39px;
     border-color: transparent;
+    border-right: ${({ color }) => {
+        if (color === 'selected') {
+            return '3px solid #AA84A1'
+        }
+        return 'none'
+    }};
+    border-radius: 2px;
     text-align: left;
     display: flex;
     align-items: center;
+    text-decoration: none;
+
+    &:hover {
+        background: rgba(170, 132, 161, 0.1);
+        border-radius: 5px;
+    }
 `
 
-export const MenuItemContainer = styled.div`
-   
-`
-
-export const MenuIcon = styled.img`
+export const MenuIconContainer = styled.div`
     margin-right: 16px;
+    display: flex;
+    align-items: center;
 `
-
-

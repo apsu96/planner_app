@@ -1,37 +1,75 @@
-import { ProfileContainer, AvatarUsernameContainer, UsernameContainer, Username, Status, MenuContainer, MenuItem, MenuIcon } from "./Profile.styled"
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { ProfileContainer, AvatarUsernameContainer, Username, Status, MenuContainer, MenuItem, MenuIconContainer } from "./Profile.styled"
 import Logo from "../../images/Logo.svg"
 import Avatar from "../../images/Avatar.svg"
-import Planning_icon from "../../images/Planning_icon.svg"
-import Tasks_icon from "../../images/Tasks_icon.svg"
-import Statistics_icon from "../../images/Statistics_icon.svg"
+import PlanningIcon from "../../images/Planning_icon"
+import TasksIcon from "../../images/Tasks_icon"
+import StatisticsIcon from "../../images/Statistics_icon"
 
-function Profile () {
+function Profile() {
+    const [currentView, setCurrentView] = useState({
+        planning: true,
+        myDay: false,
+        statistics: false
+    })
+    const location = useLocation()
+
+    useEffect(() => {
+        if (location.pathname === "/MyDay") {
+            setCurrentView({
+                planning: false,
+                myDay: true,
+                statistics: false
+            })
+        } else if (location.pathname === "/Statistics") {
+            setCurrentView({
+                planning: false,
+                myDay: false,
+                statistics: true
+            })
+        } else {
+            setCurrentView({
+                planning: true,
+                myDay: false,
+                statistics: false
+            })
+        }
+    }, [location])
+
     return <ProfileContainer>
         <div>
-            <img src={Logo} alt="logo"/>
+            <img src={Logo} alt="logo" />
         </div>
         <AvatarUsernameContainer>
-            <img src={Avatar} alt="avatar"/>
-            <UsernameContainer>
+            <img src={Avatar} alt="avatar" />
+            <div>
                 <Username>Ann Jonson</Username>
                 <Status>Online</Status>
-            </UsernameContainer>
+            </div>
         </AvatarUsernameContainer>
         <MenuContainer>
-            <MenuItem>
-                <MenuIcon src={Planning_icon} alt="Planning"/>
+            <MenuItem to='Planning' color={currentView.planning ? "selected" : "notSelected"}>
+                <MenuIconContainer>
+                    <PlanningIcon selected={currentView.planning} />
+                </MenuIconContainer>
                 Planning
             </MenuItem>
-            <MenuItem>
-                <MenuIcon src={Tasks_icon} alt="Tasks"/>
+            <MenuItem to='MyDay' color={currentView.myDay ? "selected" : "notSelected"}>
+                <MenuIconContainer>
+                    <TasksIcon selected={currentView.myDay} />
+                </MenuIconContainer>
                 Tasks for the day
             </MenuItem>
-            <MenuItem>
-                <MenuIcon src={Statistics_icon} alt="Statistics"/>
+            <MenuItem to='Statistics' color={currentView.statistics ? "selected" : "notSelected"}>
+                <MenuIconContainer>
+                    <StatisticsIcon selected={currentView.statistics} />
+                </MenuIconContainer>
                 Statistics
             </MenuItem>
         </MenuContainer>
     </ProfileContainer>
+
 }
 
 export default Profile;
