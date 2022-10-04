@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Profile from "./components/Profile";
 
 const AppContainer = styled.div`
   min-height: 100vh;
@@ -8,6 +9,7 @@ const AppContainer = styled.div`
 function App() {
   return (
     <AppContainer>
+      <Profile />
     </AppContainer>
   );
 }
