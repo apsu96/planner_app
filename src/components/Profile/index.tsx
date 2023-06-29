@@ -59,7 +59,7 @@ function Profile() {
                 <MenuIconContainer>
                     <TasksIcon selected={currentView.myDay} />
                 </MenuIconContainer>
-                Tasks for the day
+                Tasks for Today
             </MenuItem>
             <MenuItem to='Statistics' color={currentView.statistics ? "selected" : "notSelected"}>
                 <MenuIconContainer>
