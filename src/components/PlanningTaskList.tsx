@@ -1,8 +1,21 @@
-import { Container, Title } from "./UIKit.styled";
+import { PlanningColumn, TasksContainer } from "./PlanningTaskList.styled";
+import TaskLine from "./TaskLine";
+import { Container, SmallText, Title } from "./UIKit.styled";
 
 function PlanningTaskList() {
     return <Container>
-        <Title>July 1</Title>
+        <PlanningColumn>
+            <Title>July 1</Title>
+            <SmallText>Friday</SmallText>
+        </PlanningColumn>
+        <TasksContainer>
+            <TaskLine />
+            <TaskLine />
+            <TaskLine />
+            <TaskLine />
+            <TaskLine />
+            <TaskLine />
+        </TasksContainer>
     </Container>
 }
 

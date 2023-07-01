@@ -17,9 +17,10 @@ export const Title = styled.h1`
     font-family: 'OpenSans', sans-serif;
     font-weight: 600;
     color: #53514D;
+    margin: 0;
 `
 
-export const InputLabel = styled.p`
+export const Text = styled.p`
     font-size: 14px;
     font-family: 'OpenSans', sans-serif;
     font-weight: 400;
@@ -102,4 +103,51 @@ export const CustomSelectOption = styled.option`
     font-family:'OpenSans', sans-serif;
     font-weight: 400;
     padding: 16px 20px 16px;
+`
+
+export const SmallText = styled.p`
+    color: #979797;
+    font-size: 12px;
+    font-family: 'OpenSans', sans-serif;
+    font-weight: 400;
+    margin: 0;
+`
+
+export const TaskLineContainer = styled.div`
+    display: flex;
+    background-color: #F9F9F9;
+    border-radius: 16px;
+    padding: 12px 12px 12px 0;
+    height: 48px;
+    box-sizing: border-box;
+    align-items: center;
+    max-width: 460px;
+    width: 100%;
+`
+
+export const MoveButton = styled.div`
+    width: 3px;
+    height: 28px;
+    background-color: #AA84A1;
+    margin-right: 17px;
+`
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+    gap: 12px;
+`
+
+export const ActionIcon = styled.img`
+    height: 24px;
+    width: 24px;
+    &:active {
+        transform: translateY(1px);
+    }
+`
+
+export const BadgesContainer = styled.div`
+    margin-left: auto;
+    display: flex;
+    gap: 31px;
+    align-items: center;
 `
