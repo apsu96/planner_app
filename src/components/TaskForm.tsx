@@ -1,8 +1,32 @@
-import { Container, Title } from "./UIKit.styled"
+import { Container, Input, InputLabel, LargeButton, CustomSelect, TimeInput, Title } from "./UIKit.styled";
+import TimeIcon from '../images/TimeIcon.svg';
+import { TaskFormColumnContainer, TaskFormRowContainer, RowContainer, TimeIconImage } from "./TaskForm.styled";
 
-function TaskForm () {
+function TaskForm() {
     return <Container>
         <Title>Add your task</Title>
+        <TaskFormRowContainer>
+            <TaskFormColumnContainer>
+                <InputLabel>Task</InputLabel>
+                <Input placeholder='Insert your task' />
+            </TaskFormColumnContainer>
+            <TaskFormColumnContainer>
+                <InputLabel>Duration</InputLabel>
+                <RowContainer>
+                    <TimeInput placeholder='00' />
+                    <TimeIconImage src={TimeIcon} alt="timeIcon" />
+                    <TimeInput placeholder='00' />
+                </RowContainer>
+            </TaskFormColumnContainer>
+        </TaskFormRowContainer>
+        <InputLabel>Category</InputLabel>
+        <TaskFormRowContainer>
+            <CustomSelect placeholder="Select">
+                <option>Work</option>
+                <option>Leisure</option>
+            </CustomSelect>
+            <LargeButton>Add</LargeButton>
+        </TaskFormRowContainer>
     </Container>
 }
 
