@@ -151,3 +151,13 @@ export const BadgesContainer = styled.div`
     gap: 31px;
     align-items: center;
 `
+
+export const ChartBox = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 220px;
+    margin: 20px auto;
+
+`
