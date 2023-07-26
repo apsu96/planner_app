@@ -1,5 +1,52 @@
 import styled from "styled-components";
 
+export const AppContainer = styled.div`
+  min-height: 100vh;
+  max-width: 100vw;
+  width: 100%;
+  background-color: #E5E5E5;
+  display: flex;
+`;
+
+export const DrawerContainer = styled.div`
+    display: ${({visible}: {visible: boolean}) => visible? 'flex': 'none'};
+    max-width: 242px;
+    width: 100%;
+`;
+
+export const PageContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 40px 40px 44px 30px;
+  padding: ${({ isMobile }: { isMobile: boolean }) => {
+        if (isMobile) {
+            return '68px auto 40px';
+        }
+        return '40px 40px 44px 30px';
+    }};
+  gap: ${({ isMobile }: { isMobile: boolean }) => isMobile ? '20px' : '28px'};
+`;
+
+export const MobileMenuContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+export const PageTitleContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 16px;
+`;
+
+export const PageTitle = styled.p`
+    font-family: OpenSans, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    color: #53514D;
+`;
+
 export const Container = styled.div`
     display: flex;
     border-radius: 20px;
@@ -10,7 +57,7 @@ export const Container = styled.div`
     box-sizing: border-box;
     margin: 0 auto;
     flex-direction: column;
-`
+`;
 
 export const Title = styled.h1`
     font-size: 20px;
@@ -18,15 +65,14 @@ export const Title = styled.h1`
     font-weight: 600;
     color: #53514D;
     margin: 0;
-`
+`;
 
 export const Text = styled.p`
     font-size: 14px;
     font-family: 'OpenSans', sans-serif;
     font-weight: 400;
     color: #53514D;
-    
-`
+`;
 
 export const Input = styled.input`
     padding: 16px 20px;
@@ -70,18 +116,18 @@ export const LargeButton = styled.button`
     &:active {
         transform: translateY(1px);
     }
-`
+`;
 
 export const RowContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-`
+`;
 
 export const ColumnContainer = styled.div`
     display: flex;
     flex-direction: column;
-`
+`;
 
 export const CustomSelect = styled.select`
     background-color: #F9F9F9;
@@ -94,7 +140,7 @@ export const CustomSelect = styled.select`
     border: none;
     outline: none;
     box-sizing: border-box;
-`
+`;
 
 export const CustomSelectOption = styled.option`
     background-color: #F9F9F9;
@@ -103,7 +149,7 @@ export const CustomSelectOption = styled.option`
     font-family:'OpenSans', sans-serif;
     font-weight: 400;
     padding: 16px 20px 16px;
-`
+`;
 
 export const SmallText = styled.p`
     color: #979797;
@@ -111,7 +157,7 @@ export const SmallText = styled.p`
     font-family: 'OpenSans', sans-serif;
     font-weight: 400;
     margin: 0;
-`
+`;
 
 export const TaskLineContainer = styled.div`
     display: flex;
@@ -123,14 +169,14 @@ export const TaskLineContainer = styled.div`
     align-items: center;
     max-width: 460px;
     width: 100%;
-`
+`;
 
 export const MoveButton = styled.div`
     width: 3px;
     height: 28px;
     background-color: #AA84A1;
     margin-right: 17px;
-`
+`;
 
 export const ButtonsContainer = styled.div`
     display: flex;
@@ -143,14 +189,14 @@ export const ActionIcon = styled.img`
     &:active {
         transform: translateY(1px);
     }
-`
+`;
 
 export const BadgesContainer = styled.div`
     margin-left: auto;
     display: flex;
     gap: 31px;
     align-items: center;
-`
+`;
 
 export const ChartBox = styled.div`
     display: flex;
@@ -159,5 +205,4 @@ export const ChartBox = styled.div`
     width: 400px;
     height: 220px;
     margin: 20px auto;
-
-`
+`;

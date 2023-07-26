@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 export const ProfileContainer = styled.div`
     background: white;
-    max-width: 242px;
-    width: 100%;
+    width: ${({isMobile} : {isMobile: boolean}) => isMobile? '222px' : '242px'};
     box-sizing: border-box;
-    padding: 32px 0 0 40px;
+    padding: ${({isMobile} : {isMobile: boolean}) => isMobile? '57px 0 0 20px' : '32px 0 0 40px'};
     disply: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -80,4 +79,12 @@ export const MenuIconContainer = styled.div`
     margin-right: 16px;
     display: flex;
     align-items: center;
+`
+
+export const MobileLogoContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding-right: 27px;
 `
