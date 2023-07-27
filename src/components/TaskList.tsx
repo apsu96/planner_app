@@ -1,10 +1,15 @@
+import styled from "styled-components";
 import { Container, Title } from "./UIKit.styled";
+
+const TaskListContainer = styled(Container)`
+    height: 100%;
+`
 
 const TaskList = () => {
     return (
-        <Container>
+        <TaskListContainer>
             <Title>July 1</Title>
-        </Container>
+        </TaskListContainer>
     );
 };
 

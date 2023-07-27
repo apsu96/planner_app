@@ -1,11 +1,11 @@
 import { ProfileContainer, AvatarUsernameContainer, Username, Status, MenuContainer, MenuItem, MenuIconContainer, MobileLogoContainer } from "./Profile.styled"
-import Logo from "../../images/Logo.svg"
-import Avatar from "../../images/Avatar.svg"
-import PlanningIcon from "../../images/Planning_icon"
-import TasksIcon from "../../images/Tasks_icon"
-import StatisticsIcon from "../../images/Statistics_icon"
-import CloseIcon from "../../images/CloseIcon.svg"
-import { ActionIcon } from "../UIKit.styled"
+import Logo from "../images/Logo.svg"
+import Avatar from "../images/Avatar.svg"
+import PlanningIcon from "../images/Planning_icon"
+import TasksIcon from "../images/Tasks_icon"
+import StatisticsIcon from "../images/Statistics_icon"
+import CloseIcon from "../images/CloseIcon.svg"
+import { ActionIcon } from "./UIKit.styled"
 
 interface ProfileProps {
     currentView: {
@@ -30,7 +30,7 @@ function Profile({ currentView, setCurrentView, isMobile, toggleMenu }: ProfileP
             </div>
         ) : (
             <MobileLogoContainer>
-                <ActionIcon src={CloseIcon} alt="close menu" width={24} height={24} onClick={toggleMenu}/>
+                <ActionIcon src={CloseIcon} alt="close menu" width={24} height={24} onClick={toggleMenu} />
                 <img src={Logo} alt="logo" width={131} height={62} />
             </MobileLogoContainer>)}
         <AvatarUsernameContainer>

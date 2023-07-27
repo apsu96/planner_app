@@ -57,7 +57,7 @@ function App() {
 
   return (
     <AppContainer>
-      <DrawerContainer visible={isMobile && isDrawerOpen}>
+      <DrawerContainer visible={isMobile && isDrawerOpen} isMobile={isMobile}>
         <Drawer
           variant="temporary"
           open={isDrawerOpen}
@@ -70,7 +70,7 @@ function App() {
           <Profile currentView={currentView} setCurrentView={setCurrentView} isMobile={true} toggleMenu={toggleMenu} />
         </Drawer>
       </DrawerContainer>
-      <DrawerContainer visible={!isMobile}>
+      <DrawerContainer visible={!isMobile} isMobile={isMobile}>
         <Drawer
           variant="permanent"
           open={!isMobile}
@@ -79,7 +79,7 @@ function App() {
           <Profile currentView={currentView} setCurrentView={setCurrentView} isMobile={false} toggleMenu={toggleMenu} />
         </Drawer>
       </DrawerContainer>
-      <PageContainer isMobile>
+      <PageContainer isMobile={isMobile}>
         {isMobile ? (<MobileMenuContainer>
           <img src={MenuIcon} alt='menu' width={24} height={24} onClick={toggleMenu} />
           {pageTitle}

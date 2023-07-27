@@ -4,27 +4,24 @@ export const AppContainer = styled.div`
   min-height: 100vh;
   max-width: 100vw;
   width: 100%;
-  background-color: #E5E5E5;
+  background-color: #F9F9F9;
   display: flex;
 `;
 
 export const DrawerContainer = styled.div`
-    display: ${({visible}: {visible: boolean}) => visible? 'flex': 'none'};
+    display: ${({ visible }: { visible: boolean }) => visible ? 'flex' : 'none'};
+    /* min-width: 242px; */
     max-width: 242px;
-    width: 100%;
+    width: ${({ visible, isMobile }: { visible: boolean, isMobile: boolean }) => visible && isMobile ? 'none' : '100%'};
+    box-sizing: border-box;
 `;
 
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px 40px 44px 30px;
-  padding: ${({ isMobile }: { isMobile: boolean }) => {
-        if (isMobile) {
-            return '68px auto 40px';
-        }
-        return '40px 40px 44px 30px';
-    }};
+  padding: ${({ isMobile }: { isMobile: boolean }) => isMobile ? '68px 20px 40px' : '40px 40px 44px 30px'};
   gap: ${({ isMobile }: { isMobile: boolean }) => isMobile ? '20px' : '28px'};
+  width: 100%;
 `;
 
 export const MobileMenuContainer = styled.div`
@@ -52,11 +49,15 @@ export const Container = styled.div`
     border-radius: 20px;
     padding: 30px 40px;
     background-color: white;
-    max-width: 549px;
+    min-width: 549px;
     width: 100%;
     box-sizing: border-box;
     margin: 0 auto;
     flex-direction: column;
+    @media (max-width: 1420px) {
+        min-width: 335px;
+        padding: 20px;
+    }
 `;
 
 export const Title = styled.h1`

@@ -1,10 +1,8 @@
-import { Container, Title } from './UIKit.styled';
+import { Title } from './UIKit.styled';
 
 const EmotionalStateChart = () => {
     return (
-        <Container>
-            <Title>Emotional State Tracker</Title>
-        </Container>
+        <Title>Emotional State Tracker</Title>
     );
 };
 
