@@ -6,20 +6,22 @@ import StatisticsInfo from "../components/StatisticsInfo";
 import { Container as UIContainer } from "../components/UIKit.styled";
 
 function Statistics() {
-    return <Container>
-        <PlanningRow>
-            <StatisticsInfo />
-            <UIContainer>
-                <TaskCompletionChart />
-            </UIContainer>
-        </PlanningRow>
-        <PlanningRow>
-            <TaskDistribution />
-            <UIContainer>
-                <EmotionalStateChart />
-            </UIContainer>
-        </PlanningRow>
+  return (
+    <Container>
+      <PlanningRow>
+        <StatisticsInfo />
+        <UIContainer>
+          <TaskCompletionChart />
+        </UIContainer>
+      </PlanningRow>
+      <PlanningRow>
+        <TaskDistribution />
+        <UIContainer>
+          <EmotionalStateChart />
+        </UIContainer>
+      </PlanningRow>
     </Container>
+  );
 }
 
-export default Statistics
+export default Statistics;

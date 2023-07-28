@@ -1,9 +1,7 @@
-import { Title } from './UIKit.styled';
+import { Title } from "./UIKit.styled";
 
 const TaskCompletionChart = () => {
-    return (
-        <Title>Task Progress Tracker</Title>
-    );
+  return <Title>Task Progress Tracker</Title>;
 };
 
 export default TaskCompletionChart;

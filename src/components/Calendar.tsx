@@ -1,9 +1,11 @@
-import { Container, Title } from "./UIKit.styled"
+import { Container, Title } from "./UIKit.styled";
 
-function Calendar () {
-    return <Container>
-        <Title>Calendar</Title>
+function Calendar() {
+  return (
+    <Container>
+      <Title>Calendar</Title>
     </Container>
+  );
 }
 
-export default Calendar
+export default Calendar;

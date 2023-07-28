@@ -1,10 +1,10 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
-import OpenSansWoff from './OpenSans/OpenSans.woff'
-import OpenSansWoff2 from './OpenSans/OpenSans.woff2'
-import OpenSansTtf from './OpenSans/OpenSans.ttf'
+import OpenSansWoff from "./OpenSans/OpenSans.woff";
+import OpenSansWoff2 from "./OpenSans/OpenSans.woff2";
+import OpenSansTtf from "./OpenSans/OpenSans.ttf";
 
-import OpenSansSemibold from './OpenSans-SemiBold/OpenSans-SemiBold.ttf'
+import OpenSansSemibold from "./OpenSans-SemiBold/OpenSans-SemiBold.ttf";
 
 const GlobalFonts = createGlobalStyle`
     @font-face {
@@ -25,6 +25,6 @@ const GlobalFonts = createGlobalStyle`
         font-style: normal;
         font-display: swap;
     }
-`
+`;
 
-export { GlobalFonts }
+export { GlobalFonts };
