@@ -18,6 +18,7 @@ import {
   PageTitle,
   PageTitleContainer,
 } from "./components/UIKit.styled";
+import store from "./Store";
 
 function App() {
   const [currentView, setCurrentView] = useState({
@@ -73,6 +74,10 @@ function App() {
       });
     }
   }, [location]);
+
+  useEffect(() => {
+    store.getTasks();
+  }, []);
 
   return (
     <AppContainer>

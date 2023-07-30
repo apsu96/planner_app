@@ -23,6 +23,8 @@ export enum Emotions {
   Bad = "Bad",
 }
 
+export const localStorageKey = "tasks";
+
 class Store {
   toDoList: ToDoType[] = [];
 
@@ -32,10 +34,21 @@ class Store {
 
   addTodo(toDo: ToDoType) {
     this.toDoList.push(toDo);
+    this.updateLocalStorage();
   }
 
   removeToDo(id: string) {
     this.toDoList = this.toDoList.filter((toDo) => toDo.id !== id);
+    this.updateLocalStorage();
+  }
+
+  getTasks() {
+    const tasks = localStorage.getItem(localStorageKey);
+    if (tasks) this.toDoList = JSON.parse(tasks);
+  }
+
+  updateLocalStorage() {
+    localStorage.setItem(localStorageKey, JSON.stringify(this.toDoList));
   }
 }
 
