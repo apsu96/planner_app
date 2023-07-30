@@ -2,8 +2,11 @@ import moment from "moment";
 import { PlanningColumn, TasksContainer } from "./PlanningTaskList.styled";
 import TaskLine from "./TaskLine";
 import { Container, SmallText, Title } from "./UIKit.styled";
+import { observer } from "mobx-react-lite";
+import store from "../Store";
+import uuid from "react-uuid";
 
-function PlanningTaskList({ date }: { date: Date }) {
+const PlanningTaskList = observer(({ date }: { date: Date }) => {
   return (
     <Container>
       <PlanningColumn>
@@ -11,15 +14,14 @@ function PlanningTaskList({ date }: { date: Date }) {
         <SmallText>Friday</SmallText>
       </PlanningColumn>
       <TasksContainer>
-        <TaskLine />
-        <TaskLine />
-        <TaskLine />
-        <TaskLine />
-        <TaskLine />
-        <TaskLine />
+        {store.toDoList.map((toDo) =>
+          toDo.date === moment(date).format("LL") ? (
+            <TaskLine key={uuid()} toDo={toDo} />
+          ) : null,
+        )}
       </TasksContainer>
     </Container>
   );
-}
+});
 
 export default PlanningTaskList;

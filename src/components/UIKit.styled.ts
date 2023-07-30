@@ -128,12 +128,18 @@ export const LargeButton = styled.button`
   border: none;
   height: 48px;
   max-width: 180px;
-  &:hover {
+  &:hover:enabled {
     background-color: #aa84a1;
   }
   &:active {
     transform: translateY(1px);
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
   @media (min-width: 1441px) {
     font-size: 16px;
     height: 54px;

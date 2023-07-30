@@ -1,8 +1,8 @@
 import { makeAutoObservable } from "mobx";
 
-interface ToDoType {
+export interface ToDoType {
   id: string;
-  date: Date;
+  date: string;
   taskDescription: string;
   duration: {
     estimated: number;
@@ -12,12 +12,12 @@ interface ToDoType {
   emotionalState: Emotions;
 }
 
-enum TaskCategory {
+export enum TaskCategory {
   Work = "Work",
   Leisure = "Leisure",
 }
 
-enum Emotions {
+export enum Emotions {
   Excellent = "Excellent",
   Normal = "Normal",
   Bad = "Bad",
@@ -28,6 +28,14 @@ class Store {
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  addTodo(toDo: ToDoType) {
+    this.toDoList.push(toDo);
+  }
+
+  removeToDo(id: string) {
+    this.toDoList = this.toDoList.filter((toDo) => toDo.id !== id);
   }
 }
 

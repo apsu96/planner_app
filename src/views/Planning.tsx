@@ -11,7 +11,7 @@ function Planning() {
     <Container>
       <PlanningRow>
         <Calendar date={date} setDate={setDate} />
-        <TaskForm />
+        <TaskForm date={date} />
       </PlanningRow>
       <PlanningRow>
         <PlanningTaskList date={date} />
