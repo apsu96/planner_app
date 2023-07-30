@@ -75,6 +75,9 @@ export const Text = styled.p`
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
   color: #53514d;
+  @media (min-width: 1441px) {
+    font-size: 18px;
+  }
 `;
 
 export const Input = styled.input`
@@ -86,8 +89,11 @@ export const Input = styled.input`
   outline: none;
   border-radius: 12px;
   border: none;
-  width: 260px;
+  width: 100%;
   box-sizing: border-box;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const TimeInput = styled.input`
@@ -99,9 +105,16 @@ export const TimeInput = styled.input`
   outline: none;
   border-radius: 12px;
   border: none;
-  width: 80px;
+  width: 100%;
+  max-width: 80px;
   box-sizing: border-box;
   text-align: center;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
+  @media (max-width: 820px) {
+    max-width: 100%;
+  }
 `;
 
 export const LargeButton = styled.button`
@@ -113,11 +126,21 @@ export const LargeButton = styled.button`
   background-color: #53514d;
   outline: none;
   border: none;
+  height: 48px;
+  max-width: 180px;
   &:hover {
     background-color: #aa84a1;
   }
   &:active {
     transform: translateY(1px);
+  }
+  @media (min-width: 1441px) {
+    font-size: 16px;
+    height: 54px;
+  }
+  @media (max-width: 820px) {
+    max-width: 100%;
+    height: 50px;
   }
 `;
 
@@ -134,7 +157,7 @@ export const ColumnContainer = styled.div`
 
 export const CustomSelect = styled.select`
   background-color: #f9f9f9;
-  width: 260px;
+  width: 100%;
   font-size: 12px;
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
@@ -143,6 +166,9 @@ export const CustomSelect = styled.select`
   border: none;
   outline: none;
   box-sizing: border-box;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const CustomSelectOption = styled.option`
@@ -152,6 +178,9 @@ export const CustomSelectOption = styled.option`
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
   padding: 16px 20px 16px;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const SmallText = styled.p`
@@ -160,6 +189,9 @@ export const SmallText = styled.p`
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
   margin: 0;
+  @media (min-width: 1441px) {
+    font-size: 14px;
+  }
 `;
 
 export const TaskLineContainer = styled.div`

@@ -1,4 +1,4 @@
-import { Container, Title } from "./UIKit.styled";
+import { Container } from "./UIKit.styled";
 import CalendarEl from "react-calendar";
 import "./Calendar.css";
 
@@ -11,7 +11,6 @@ function Calendar({
 }) {
   return (
     <Container>
-      <Title>Calendar</Title>
       <CalendarEl value={date} onChange={setDate as any} />
     </Container>
   );
