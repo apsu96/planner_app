@@ -11,7 +11,6 @@ export const AppContainer = styled.div`
 export const DrawerContainer = styled.div`
   display: ${({ visible }: { visible: boolean }) =>
     visible ? "flex" : "none"};
-  /* min-width: 242px; */
   max-width: 242px;
   width: ${({ visible, isMobile }: { visible: boolean; isMobile: boolean }) =>
     visible && isMobile ? "none" : "100%"};

@@ -3,16 +3,18 @@ import Calendar from "../components/Calendar";
 import TaskForm from "../components/TaskForm";
 import PlanningTaskList from "../components/PlanningTaskList";
 import TaskDistribution from "../components/TaskDistribution";
+import { useState } from "react";
 
 function Planning() {
+  const [date, setDate] = useState(new Date());
   return (
     <Container>
       <PlanningRow>
-        <Calendar />
+        <Calendar date={date} setDate={setDate} />
         <TaskForm />
       </PlanningRow>
       <PlanningRow>
-        <PlanningTaskList />
+        <PlanningTaskList date={date} />
         <TaskDistribution />
       </PlanningRow>
     </Container>

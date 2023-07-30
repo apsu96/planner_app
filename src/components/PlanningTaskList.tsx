@@ -1,12 +1,13 @@
+import moment from "moment";
 import { PlanningColumn, TasksContainer } from "./PlanningTaskList.styled";
 import TaskLine from "./TaskLine";
 import { Container, SmallText, Title } from "./UIKit.styled";
 
-function PlanningTaskList() {
+function PlanningTaskList({ date }: { date: Date }) {
   return (
     <Container>
       <PlanningColumn>
-        <Title>July 1</Title>
+        <Title>{moment(date).format("LL")}</Title>
         <SmallText>Friday</SmallText>
       </PlanningColumn>
       <TasksContainer>
