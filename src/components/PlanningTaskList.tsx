@@ -1,10 +1,10 @@
 import moment from "moment";
 import { PlanningColumn, TasksContainer } from "./PlanningTaskList.styled";
-import TaskLine from "./TaskLine";
 import { Container, SmallText, Title } from "./UIKit.styled";
 import { observer } from "mobx-react-lite";
 import store from "../Store";
 import uuid from "react-uuid";
+import TaskLine from "./TaskLine";
 
 const PlanningTaskList = observer(({ date }: { date: Date }) => {
   return (

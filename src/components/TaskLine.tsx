@@ -6,6 +6,8 @@ import {
   ButtonsContainer,
   ActionIcon,
   BadgesContainer,
+  CategoryContainer,
+  TimeContainer,
 } from "./UIKit.styled";
 import CloseIcon from "../images/CloseIcon.svg";
 import EditIcon from "../images/EditIcon.svg";
@@ -20,10 +22,14 @@ const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
       <MoveButton />
       <Text>{toDo.taskDescription}</Text>
       <BadgesContainer>
-        <SmallText>{toDo.category}</SmallText>
-        <SmallText>
-          {hours ? `${hours} h` : null} {minutes ? `${minutes} min` : null}
-        </SmallText>
+        <CategoryContainer>
+          <SmallText>{toDo.category}</SmallText>
+        </CategoryContainer>
+        <TimeContainer>
+          <SmallText>
+            {hours ? `${hours} h` : null} {minutes ? `${minutes} min` : null}
+          </SmallText>
+        </TimeContainer>
         <ButtonsContainer>
           <ActionIcon src={EditIcon} alt="edit" />
           <ActionIcon

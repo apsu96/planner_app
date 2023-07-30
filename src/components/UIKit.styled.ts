@@ -128,6 +128,7 @@ export const LargeButton = styled.button`
   border: none;
   height: 48px;
   max-width: 180px;
+  cursor: pointer;
   &:hover:enabled {
     background-color: #aa84a1;
   }
@@ -208,8 +209,7 @@ export const TaskLineContainer = styled.div`
   height: 48px;
   box-sizing: border-box;
   align-items: center;
-  max-width: 460px;
-  width: 100%;
+  width: 97%;
 `;
 
 export const MoveButton = styled.div`
@@ -227,6 +227,7 @@ export const ButtonsContainer = styled.div`
 export const ActionIcon = styled.img`
   height: 24px;
   width: 24px;
+  cursor: pointer;
   &:active {
     transform: translateY(1px);
   }
@@ -235,8 +236,10 @@ export const ActionIcon = styled.img`
 export const BadgesContainer = styled.div`
   margin-left: auto;
   display: flex;
-  gap: 31px;
+  gap: 5px;
   align-items: center;
+  min-width: 201px;
+  justify-content: flex-end;
 `;
 
 export const ChartBox = styled.div`
@@ -246,4 +249,16 @@ export const ChartBox = styled.div`
   width: 400px;
   height: 220px;
   margin: 20px auto;
+`;
+
+export const CategoryContainer = styled.div`
+  width: 41px;
+`;
+
+export const TimeContainer = styled.div`
+  width: 70px;
+  text-align: center;
+  @media (min-width: 1441px) {
+    min-width: 100px;
+  }
 `;
