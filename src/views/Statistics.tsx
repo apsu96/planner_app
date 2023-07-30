@@ -15,7 +15,7 @@ function Statistics() {
         </UIContainer>
       </PlanningRow>
       <PlanningRow>
-        <TaskDistribution />
+        <TaskDistribution date={new Date()} />
         <UIContainer>
           <EmotionalStateChart />
         </UIContainer>

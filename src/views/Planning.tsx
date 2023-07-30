@@ -15,7 +15,7 @@ function Planning() {
       </PlanningRow>
       <PlanningRow>
         <PlanningTaskList date={date} />
-        <TaskDistribution />
+        <TaskDistribution date={date} />
       </PlanningRow>
     </Container>
   );
