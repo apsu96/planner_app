@@ -246,9 +246,13 @@ export const ChartBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 400px;
-  height: 220px;
-  margin: 20px auto;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  @media (min-width: 1441px) {
+    width: 70%;
+    height: 70%;
+  }
 `;
 
 export const CategoryContainer = styled.div`
