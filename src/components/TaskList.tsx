@@ -12,9 +12,9 @@ const TaskList = observer(() => {
       <Title>{moment().format("LL")}</Title>
       <SmallText>{moment().format("dddd")}</SmallText>
       <TaskListBox>
-        {store.toDoList.map((toDo) =>
+        {store.toDoList.map((toDo, index) =>
           toDo.date === moment().format("LL") ? (
-            <Task toDo={toDo} key={uuid()} />
+            <Task toDo={toDo} key={uuid()} index={index} />
           ) : null,
         )}
       </TaskListBox>

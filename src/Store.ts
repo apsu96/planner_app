@@ -47,6 +47,11 @@ class Store {
     if (tasks) this.toDoList = JSON.parse(tasks);
   }
 
+  updateRealDuration(index: number, realDuration: number) {
+    this.toDoList[index].duration.real = realDuration;
+    this.updateLocalStorage();
+  }
+
   updateLocalStorage() {
     localStorage.setItem(localStorageKey, JSON.stringify(this.toDoList));
   }
