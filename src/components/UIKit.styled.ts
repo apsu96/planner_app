@@ -151,6 +151,16 @@ export const LargeButton = styled.button`
   }
 `;
 
+export const SmallButton = styled(LargeButton)`
+  padding: 0px 16px;
+  height: 24px;
+  font-size: 12px;
+  @media (min-width: 1441px) {
+    font-size: 14px;
+    height: 40px;
+  }
+`;
+
 export const RowContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -230,6 +240,10 @@ export const ActionIcon = styled.img`
   cursor: pointer;
   &:active {
     transform: translateY(1px);
+  }
+  @media (min-width: 1441px) {
+    width: 30px;
+    height: 30px;
   }
 `;
 

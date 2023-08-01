@@ -62,7 +62,7 @@ const TaskDistribution = observer(({ date }: { date: Date }) => {
     });
     setWorkTime(calcWorkTime);
     setLeisureTime(calsLeisureTime);
-  }, [store, date]);
+  }, [store.toDoList.length, date]);
 
   useEffect(() => {
     const chart = chartRef.current;

@@ -1,16 +1,25 @@
-import styled from "styled-components";
-import { Container, Title } from "./UIKit.styled";
+import { SmallText, Title } from "./UIKit.styled";
+import moment from "moment";
+import { observer } from "mobx-react-lite";
+import store from "../Store";
+import uuid from "react-uuid";
+import { TaskListBox, TaskListContainer } from "./TaskList.styled";
+import Task from "./Task";
 
-const TaskListContainer = styled(Container)`
-  height: 100%;
-`;
-
-const TaskList = () => {
+const TaskList = observer(() => {
   return (
     <TaskListContainer>
-      <Title>July 1</Title>
+      <Title>{moment().format("LL")}</Title>
+      <SmallText>{moment().format("dddd")}</SmallText>
+      <TaskListBox>
+        {store.toDoList.map((toDo) =>
+          toDo.date === moment().format("LL") ? (
+            <Task toDo={toDo} key={uuid()} />
+          ) : null,
+        )}
+      </TaskListBox>
     </TaskListContainer>
   );
-};
+});
 
 export default TaskList;

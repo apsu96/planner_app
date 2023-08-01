@@ -11,7 +11,7 @@ const PlanningTaskList = observer(({ date }: { date: Date }) => {
     <Container>
       <PlanningColumn>
         <Title>{moment(date).format("LL")}</Title>
-        <SmallText>Friday</SmallText>
+        <SmallText>{moment().format("dddd")}</SmallText>
       </PlanningColumn>
       <TasksContainer>
         {store.toDoList.map((toDo) =>
