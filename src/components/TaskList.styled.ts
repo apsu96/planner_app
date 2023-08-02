@@ -109,7 +109,8 @@ export const OptionContainer = styled.ul`
   border-radius: 16px;
   padding: 10px 10px 16px;
   @media (max-width: 820px) {
-    padding: 0px;
+    padding: 0 1Opx;
+    margin: 0;
   }
 `;
 
@@ -124,9 +125,6 @@ export const CustomOption = styledMui(Option)`
     cursor: default;
     @media (min-width: 1441px) {
         font-size: 14px;
-    }
-    @media (max-width: 820px) {
-        padding: 0;
     }
     &:hover {
         color: #aa84a1;

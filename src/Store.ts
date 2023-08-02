@@ -9,7 +9,7 @@ export interface ToDoType {
     real: number;
   };
   category: TaskCategory;
-  emotionalState: Emotions;
+  emotionalState: Emotions | null;
 }
 
 export enum TaskCategory {
@@ -49,6 +49,11 @@ class Store {
 
   updateRealDuration(index: number, realDuration: number) {
     this.toDoList[index].duration.real = realDuration;
+    this.updateLocalStorage();
+  }
+
+  setEmotions(index: number, emotion: Emotions) {
+    this.toDoList[index].emotionalState = emotion;
     this.updateLocalStorage();
   }
 

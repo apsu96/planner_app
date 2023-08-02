@@ -17,7 +17,7 @@ import {
   TimeIconImage,
 } from "./TaskForm.styled";
 import { useState } from "react";
-import store, { Emotions, TaskCategory } from "../Store";
+import store, { TaskCategory } from "../Store";
 import uuid from "react-uuid";
 import moment from "moment";
 
@@ -47,7 +47,7 @@ function TaskForm({ date }: { date: Date }) {
         real: 0,
       },
       category: category,
-      emotionalState: Emotions.Normal,
+      emotionalState: null,
     });
     clearForm();
   }

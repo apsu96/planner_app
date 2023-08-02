@@ -19,12 +19,16 @@ import { SelectOption } from "@mui/base";
 import PlayIcon from "../images/PlayIcon.png";
 import PauseIcon from "../images/PauseIcon.png";
 import MoodIcon from "@mui/icons-material/Mood";
+import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
+import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { useMediaQuery } from "@mui/material";
 
 const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   const hours = Math.floor(toDo.duration.estimated / 60);
   const minutes = toDo.duration.estimated - hours * 60;
-  const [emotions, setEmotions] = useState<Emotions | null | undefined>();
+  const [emotions, setEmotions] = useState<Emotions | null | undefined>(
+    toDo.emotionalState,
+  );
   const [timerEnabled, setTimerEnabled] = useState(false);
   const [realDuration, setRealDuration] = useState(toDo.duration.real);
   const isMobile = useMediaQuery("(max-width:820px)");
@@ -39,8 +43,12 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
     } else {
       if (option == null) {
         return <MoodIcon />;
-      } else {
+      } else if (emotions === Emotions.Excellent) {
         return <MoodIcon />;
+      } else if (emotions === Emotions.Normal) {
+        return <SentimentSatisfiedIcon />;
+      } else {
+        return <SentimentVeryDissatisfiedIcon />;
       }
     }
   }
@@ -107,19 +115,18 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
         <CustomSelect
           label="Emotion"
           value={emotions}
-          onChange={(_, value) => setEmotions(value as Emotions)}
+          onChange={(_, value) => {
+            setEmotions(value as Emotions);
+            store.setEmotions(index, value as Emotions);
+          }}
           slots={{ listbox: OptionContainer, root: "button" }}
           renderValue={renderValue}
         >
           <CustomOption value={Emotions.Excellent}>
-            {isMobile ? <MoodIcon /> : Emotions.Excellent}
+            {Emotions.Excellent}
           </CustomOption>
-          <CustomOption value={Emotions.Normal}>
-            {isMobile ? <MoodIcon /> : Emotions.Normal}
-          </CustomOption>
-          <CustomOption value={Emotions.Bad}>
-            {isMobile ? <MoodIcon /> : Emotions.Bad}
-          </CustomOption>
+          <CustomOption value={Emotions.Normal}>{Emotions.Normal}</CustomOption>
+          <CustomOption value={Emotions.Bad}>{Emotions.Bad}</CustomOption>
         </CustomSelect>
         <SmallButton>Finish</SmallButton>
       </StyledBadgesContainer>
