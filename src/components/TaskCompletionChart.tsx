@@ -1,7 +1,36 @@
-import { Title } from "./UIKit.styled";
+import { observer } from "mobx-react-lite";
+import DoughnutChart from "./DoughnutChart";
+import { ChartBox, Title } from "./UIKit.styled";
+import { useEffect, useState } from "react";
+import store from "../Store";
+import moment from "moment";
 
-const TaskCompletionChart = () => {
-  return <Title>Task Progress Tracker</Title>;
-};
+const TaskCompletionChart = observer(() => {
+  const [data, setData] = useState<number[]>([]);
+  useEffect(() => {
+    let done = 0;
+    let toBeDone = 0;
+    let totalEstimatedTime = 0;
+    const sortedList = store.toDoList.filter(
+      (toDo) => toDo.date === moment().format("LL"),
+    );
+    sortedList.map((toDo) => {
+      totalEstimatedTime += toDo.duration.estimated;
+      if (!toDo.isDone) {
+        toBeDone += toDo.duration.estimated;
+      }
+    });
+    done = totalEstimatedTime - toBeDone;
+    setData([done, toBeDone]);
+  }, [store, store.toDoList]);
+  return (
+    <>
+      <Title>Task Progress Tracker</Title>
+      <ChartBox>
+        <DoughnutChart labels={["Done", "To be done"]} data={data} />
+      </ChartBox>
+    </>
+  );
+});
 
 export default TaskCompletionChart;

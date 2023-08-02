@@ -78,7 +78,7 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   function toggleCompleteButton(isDone: boolean) {
     setTimerEnabled(false);
     setIsDone(isDone);
-    store.setTaskStatus(index, isDone);
+    store.setTaskStatus(toDo.id, isDone);
   }
 
   useEffect(() => {

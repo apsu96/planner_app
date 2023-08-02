@@ -58,8 +58,10 @@ class Store {
     this.updateLocalStorage();
   }
 
-  setTaskStatus(index: number, isDone: boolean) {
-    this.toDoList[index].isDone = isDone;
+  setTaskStatus(id: string, isDone: boolean) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id ? { ...toDo, isDone } : toDo,
+    );
     this.updateLocalStorage();
   }
 
