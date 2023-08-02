@@ -48,6 +48,7 @@ function TaskForm({ date }: { date: Date }) {
       },
       category: category,
       emotionalState: null,
+      isDone: false,
     });
     clearForm();
   }

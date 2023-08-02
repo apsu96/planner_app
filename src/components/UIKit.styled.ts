@@ -161,6 +161,21 @@ export const SmallButton = styled(LargeButton)`
   }
 `;
 
+export const IconWrapperButton = styled.button`
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: 30px;
+  outline: 0;
+  border: none;
+  text-align: center;
+  &:disabled {
+    cursor: not-allowed;
+    transform: none;
+  }
+`;
+
 export const RowContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -206,6 +221,7 @@ export const SmallText = styled.p`
   font-family: "OpenSans", sans-serif;
   font-weight: 400;
   margin: 0;
+  cursor: default;
   @media (min-width: 1441px) {
     font-size: 14px;
   }
@@ -237,10 +253,13 @@ export const ButtonsContainer = styled.div`
 export const ActionIcon = styled.img`
   height: 24px;
   width: 24px;
-  cursor: pointer;
+  cursor: ${({ disable }: { disable: boolean }) =>
+    disable ? "not-allowed" : "pointer"};
   &:active {
-    transform: translateY(1px);
+    transform: ${({ disable }: { disable: boolean }) =>
+      disable ? "none" : "translateY(1px)"};
   }
+
   @media (min-width: 1441px) {
     width: 30px;
     height: 30px;

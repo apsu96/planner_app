@@ -7,9 +7,11 @@ import {
   TaskContainer,
   TaskInfoContainer,
   OptionContainer,
+  EditButton,
 } from "./TaskList.styled";
 import {
   ActionIcon,
+  IconWrapperButton,
   MoveButton,
   SmallButton,
   SmallText,
@@ -31,6 +33,7 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   );
   const [timerEnabled, setTimerEnabled] = useState(false);
   const [realDuration, setRealDuration] = useState(toDo.duration.real);
+  const [isDone, setIsDone] = useState(toDo.isDone);
   const isMobile = useMediaQuery("(max-width:820px)");
 
   function renderValue(option: SelectOption<any> | null | SelectOption<any>[]) {
@@ -72,6 +75,12 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
     return hours + ":" + minutes + ":" + seconds;
   }
 
+  function toggleCompleteButton(isDone: boolean) {
+    setTimerEnabled(false);
+    setIsDone(isDone);
+    store.setTaskStatus(index, isDone);
+  }
+
   useEffect(() => {
     const timerId = setInterval(() => {
       setRealDuration((realDuration) => realDuration + 1);
@@ -86,7 +95,7 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   }, [timerEnabled]);
 
   return (
-    <TaskContainer>
+    <TaskContainer isDone={isDone}>
       <MoveButton />
       <TaskInfoContainer>
         <Text>{toDo.taskDescription}</Text>
@@ -100,17 +109,16 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
       <StyledBadgesContainer>
         <SmallText>{timerView()}</SmallText>
         {timerEnabled ? (
-          <ActionIcon
-            src={PauseIcon}
-            alt="pause"
-            onClick={() => setTimerEnabled(false)}
-          />
+          <IconWrapperButton onClick={() => setTimerEnabled(false)}>
+            <ActionIcon src={PauseIcon} alt="pause" disable={isDone} />
+          </IconWrapperButton>
         ) : (
-          <ActionIcon
-            src={PlayIcon}
-            alt="play"
+          <IconWrapperButton
+            disabled={isDone}
             onClick={() => setTimerEnabled(true)}
-          />
+          >
+            <ActionIcon src={PlayIcon} alt="play" disable={isDone} />
+          </IconWrapperButton>
         )}
         <CustomSelect
           label="Emotion"
@@ -121,6 +129,7 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
           }}
           slots={{ listbox: OptionContainer, root: "button" }}
           renderValue={renderValue}
+          disabled={isDone}
         >
           <CustomOption value={Emotions.Excellent}>
             {Emotions.Excellent}
@@ -128,7 +137,15 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
           <CustomOption value={Emotions.Normal}>{Emotions.Normal}</CustomOption>
           <CustomOption value={Emotions.Bad}>{Emotions.Bad}</CustomOption>
         </CustomSelect>
-        <SmallButton>Finish</SmallButton>
+        {!isDone ? (
+          <SmallButton onClick={() => toggleCompleteButton(true)}>
+            Finish
+          </SmallButton>
+        ) : (
+          <EditButton onClick={() => toggleCompleteButton(false)}>
+            Edit
+          </EditButton>
+        )}
       </StyledBadgesContainer>
     </TaskContainer>
   );

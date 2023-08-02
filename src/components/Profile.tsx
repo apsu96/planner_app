@@ -41,6 +41,7 @@ function Profile({ currentView, isMobile, toggleMenu }: ProfileProps) {
             width={24}
             height={24}
             onClick={toggleMenu}
+            disable={false}
           />
           <img src={Logo} alt="logo" width={131} height={62} />
         </MobileLogoContainer>

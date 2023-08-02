@@ -31,11 +31,12 @@ const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
           </SmallText>
         </TimeContainer>
         <ButtonsContainer>
-          <ActionIcon src={EditIcon} alt="edit" />
+          <ActionIcon src={EditIcon} alt="edit" disable={false} />
           <ActionIcon
             src={CloseIcon}
             alt="close"
             onClick={() => store.removeToDo(toDo.id)}
+            disable={false}
           />
         </ButtonsContainer>
       </BadgesContainer>

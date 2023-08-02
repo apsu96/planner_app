@@ -10,6 +10,7 @@ export interface ToDoType {
   };
   category: TaskCategory;
   emotionalState: Emotions | null;
+  isDone: boolean;
 }
 
 export enum TaskCategory {
@@ -54,6 +55,11 @@ class Store {
 
   setEmotions(index: number, emotion: Emotions) {
     this.toDoList[index].emotionalState = emotion;
+    this.updateLocalStorage();
+  }
+
+  setTaskStatus(index: number, isDone: boolean) {
+    this.toDoList[index].isDone = isDone;
     this.updateLocalStorage();
   }
 

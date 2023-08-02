@@ -2,6 +2,7 @@ import styled from "styled-components";
 import {
   BadgesContainer,
   Container,
+  SmallButton,
   TaskLineContainer,
   Text,
 } from "./UIKit.styled";
@@ -52,6 +53,7 @@ export const TaskInfoContainer = styled.div`
 
 export const TaskContainer = styled(TaskLineContainer)`
   height: auto;
+  opacity: ${({ isDone }: { isDone: boolean }) => (isDone ? "0.5" : "1")};
 `;
 
 export const StyledBadgesContainer = styled(BadgesContainer)`
@@ -73,6 +75,7 @@ export const CustomSelect = styledMui(Select)`
     text-align: left;
     width: 62px;
     position: relative;
+    cursor: pointer;
     @media (min-width: 1441px) {
         font-size: 14px;
         width: 71px;
@@ -93,6 +96,10 @@ export const CustomSelect = styledMui(Select)`
             content: none;
         }
         
+    }
+    &:disabled {
+      cursor: not-allowed;
+      transform: none;
     }
     &.${selectClasses.expanded} {
         &::after {
@@ -122,7 +129,7 @@ export const CustomOption = styledMui(Option)`
     font-weight: 500;
     padding-bottom: 6px;
     line-height: 24px;
-    cursor: default;
+    cursor: pointer;
     @media (min-width: 1441px) {
         font-size: 14px;
     }
@@ -140,5 +147,16 @@ export const CustomOption = styledMui(Option)`
 export const TaskText = styled(Text)`
   @media (max-width: 820px) {
     font-size: 12px;
+  }
+`;
+
+export const EditButton = styled(SmallButton)`
+  padding: 0px 22.5px;
+  opacity: 0.5;
+  @media (max-width: 820px) {
+    padding: 0px 21.7px;
+  }
+  &:hover:enabled {
+    background-color: #53514d;
   }
 `;
