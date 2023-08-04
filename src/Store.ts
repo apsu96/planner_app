@@ -48,13 +48,25 @@ class Store {
     if (tasks) this.toDoList = JSON.parse(tasks);
   }
 
-  updateRealDuration(index: number, realDuration: number) {
-    this.toDoList[index].duration.real = realDuration;
+  updateRealDuration(id: string, realDuration: number) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id
+        ? {
+            ...toDo,
+            duration: {
+              ...toDo.duration,
+              real: realDuration,
+            },
+          }
+        : toDo,
+    );
     this.updateLocalStorage();
   }
 
-  setEmotions(index: number, emotion: Emotions) {
-    this.toDoList[index].emotionalState = emotion;
+  setEmotions(id: string, emotion: Emotions) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id ? { ...toDo, emotionalState: emotion } : toDo,
+    );
     this.updateLocalStorage();
   }
 

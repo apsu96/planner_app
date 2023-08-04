@@ -24,15 +24,18 @@ import MoodIcon from "@mui/icons-material/Mood";
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { useMediaQuery } from "@mui/material";
+import { observer } from "mobx-react-lite";
 
-const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
+const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
   const hours = Math.floor(toDo.duration.estimated / 60);
   const minutes = toDo.duration.estimated - hours * 60;
   const [emotions, setEmotions] = useState<Emotions | null | undefined>(
     toDo.emotionalState,
   );
   const [timerEnabled, setTimerEnabled] = useState(false);
-  const [realDuration, setRealDuration] = useState(toDo.duration.real);
+  const [realDuration, setRealDuration] = useState(
+    store.toDoList[index]?.duration.real,
+  );
   const [isDone, setIsDone] = useState(toDo.isDone);
   const isMobile = useMediaQuery("(max-width:820px)");
 
@@ -57,7 +60,6 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   }
 
   function timerView() {
-    store.updateRealDuration(index, realDuration);
     let hours: string | number = Math.floor(realDuration / 36000);
     let minutes: string | number = Math.floor(
       (realDuration - hours * 36000) / 60,
@@ -82,7 +84,10 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   }
 
   useEffect(() => {
+    let duration = realDuration;
     const timerId = setInterval(() => {
+      duration += 1;
+      store.updateRealDuration(toDo.id, duration);
       setRealDuration((realDuration) => realDuration + 1);
     }, 1000);
     if (!timerEnabled) {
@@ -125,7 +130,7 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
           value={emotions}
           onChange={(_, value) => {
             setEmotions(value as Emotions);
-            store.setEmotions(index, value as Emotions);
+            store.setEmotions(toDo.id, value as Emotions);
           }}
           slots={{ listbox: OptionContainer, root: "button" }}
           renderValue={renderValue}
@@ -149,6 +154,6 @@ const Task = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
       </StyledBadgesContainer>
     </TaskContainer>
   );
-};
+});
 
 export default Task;

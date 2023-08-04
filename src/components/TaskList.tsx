@@ -1,12 +1,11 @@
 import { SmallText, Title } from "./UIKit.styled";
 import moment from "moment";
-import { observer } from "mobx-react-lite";
 import store from "../Store";
 import uuid from "react-uuid";
 import { TaskListBox, TaskListContainer } from "./TaskList.styled";
 import Task from "./Task";
 
-const TaskList = observer(() => {
+const TaskList = () => {
   return (
     <TaskListContainer>
       <Title>{moment().format("LL")}</Title>
@@ -20,6 +19,6 @@ const TaskList = observer(() => {
       </TaskListBox>
     </TaskListContainer>
   );
-});
+};
 
 export default TaskList;
