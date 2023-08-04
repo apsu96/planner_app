@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
 import store, { Emotions, ToDoType } from "../Store";
 import {
-  CustomSelect,
-  CustomOption,
   StyledBadgesContainer,
   TaskContainer,
   TaskInfoContainer,
-  OptionContainer,
   EditButton,
 } from "./TaskList.styled";
 import {
@@ -25,6 +22,7 @@ import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import { useMediaQuery } from "@mui/material";
 import { observer } from "mobx-react-lite";
+import Select from "./Select";
 
 const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
   const hours = Math.floor(toDo.duration.estimated / 60);
@@ -83,6 +81,11 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
     store.setTaskStatus(toDo.id, isDone);
   }
 
+  function selectValue(value: any) {
+    setEmotions(value as Emotions);
+    store.setEmotions(toDo.id, value as Emotions);
+  }
+
   useEffect(() => {
     let duration = realDuration;
     const timerId = setInterval(() => {
@@ -125,23 +128,13 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
             <ActionIcon src={PlayIcon} alt="play" disable={isDone} />
           </IconWrapperButton>
         )}
-        <CustomSelect
-          label="Emotion"
-          value={emotions}
-          onChange={(_, value) => {
-            setEmotions(value as Emotions);
-            store.setEmotions(toDo.id, value as Emotions);
-          }}
-          slots={{ listbox: OptionContainer, root: "button" }}
+        <Select
+          values={Object.values(Emotions)}
+          initialValue={emotions}
+          setValue={selectValue}
           renderValue={renderValue}
           disabled={isDone}
-        >
-          <CustomOption value={Emotions.Excellent}>
-            {Emotions.Excellent}
-          </CustomOption>
-          <CustomOption value={Emotions.Normal}>{Emotions.Normal}</CustomOption>
-          <CustomOption value={Emotions.Bad}>{Emotions.Bad}</CustomOption>
-        </CustomSelect>
+        />
         {!isDone ? (
           <SmallButton onClick={() => toggleCompleteButton(true)}>
             Finish
