@@ -5,7 +5,10 @@ export interface ToDoType {
   date: string;
   taskDescription: string;
   duration: {
-    estimated: number;
+    estimated: {
+      hours: number;
+      minutes: number;
+    };
     real: number;
   };
   category: TaskCategory;
@@ -48,6 +51,42 @@ class Store {
     if (tasks) this.toDoList = JSON.parse(tasks);
   }
 
+  setEstimatedHours(id: string, hours: number) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id
+        ? {
+            ...toDo,
+            duration: {
+              ...toDo.duration,
+              estimated: {
+                ...toDo.duration.estimated,
+                hours: hours,
+              },
+            },
+          }
+        : toDo,
+    );
+    this.updateLocalStorage();
+  }
+
+  setEstimatedMinutes(id: string, minutes: number) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id
+        ? {
+            ...toDo,
+            duration: {
+              ...toDo.duration,
+              estimated: {
+                ...toDo.duration.estimated,
+                minutes: minutes,
+              },
+            },
+          }
+        : toDo,
+    );
+    this.updateLocalStorage();
+  }
+
   updateRealDuration(id: string, realDuration: number) {
     this.toDoList = this.toDoList.map((toDo) =>
       toDo.id === id
@@ -73,6 +112,13 @@ class Store {
   setTaskStatus(id: string, isDone: boolean) {
     this.toDoList = this.toDoList.map((toDo) =>
       toDo.id === id ? { ...toDo, isDone } : toDo,
+    );
+    this.updateLocalStorage();
+  }
+
+  setTaskCategory(id: string, category: TaskCategory) {
+    this.toDoList = this.toDoList.map((toDo) =>
+      toDo.id === id ? { ...toDo, category } : toDo,
     );
     this.updateLocalStorage();
   }

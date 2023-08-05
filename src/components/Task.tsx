@@ -25,9 +25,7 @@ import { observer } from "mobx-react-lite";
 import Select from "./Select";
 
 const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
-  const hours = Math.floor(toDo.duration.estimated / 60);
-  const minutes = toDo.duration.estimated - hours * 60;
-  const [emotions, setEmotions] = useState<Emotions | null | undefined>(
+  const [emotion, setEmotion] = useState<Emotions | null | undefined>(
     toDo.emotionalState,
   );
   const [timerEnabled, setTimerEnabled] = useState(false);
@@ -42,14 +40,14 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
       if (option == null) {
         return "Emotion";
       } else {
-        return emotions;
+        return emotion;
       }
     } else {
       if (option == null) {
         return <MoodIcon />;
-      } else if (emotions === Emotions.Excellent) {
+      } else if (emotion === Emotions.Excellent) {
         return <MoodIcon />;
-      } else if (emotions === Emotions.Normal) {
+      } else if (emotion === Emotions.Normal) {
         return <SentimentSatisfiedIcon />;
       } else {
         return <SentimentVeryDissatisfiedIcon />;
@@ -82,7 +80,7 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
   }
 
   function selectValue(value: any) {
-    setEmotions(value as Emotions);
+    setEmotion(value as Emotions);
     store.setEmotions(toDo.id, value as Emotions);
   }
 
@@ -109,8 +107,14 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
         <Text>{toDo.taskDescription}</Text>
         {!isMobile ? (
           <SmallText>
-            {toDo.category} ({hours ? `${hours} h` : null}{" "}
-            {minutes ? `${minutes} min` : null})
+            {toDo.category} (
+            {toDo.duration.estimated.hours
+              ? `${toDo.duration.estimated.hours} h`
+              : null}{" "}
+            {toDo.duration.estimated.minutes
+              ? `${toDo.duration.estimated.minutes} min`
+              : null}
+            )
           </SmallText>
         ) : null}
       </TaskInfoContainer>
@@ -130,7 +134,7 @@ const Task = observer(({ toDo, index }: { toDo: ToDoType; index: number }) => {
         )}
         <Select
           values={Object.values(Emotions)}
-          initialValue={emotions}
+          value={emotion}
           setValue={selectValue}
           renderValue={renderValue}
           disabled={isDone}

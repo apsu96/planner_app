@@ -15,9 +15,11 @@ const TaskCompletionChart = observer(() => {
       (toDo) => toDo.date === moment().format("LL"),
     );
     sortedList.map((toDo) => {
-      totalEstimatedTime += toDo.duration.estimated;
+      totalEstimatedTime +=
+        toDo.duration.estimated.hours * 60 + toDo.duration.estimated.minutes;
       if (!toDo.isDone) {
-        toBeDone += toDo.duration.estimated;
+        toBeDone +=
+          toDo.duration.estimated.hours * 60 + toDo.duration.estimated.minutes;
       }
     });
     done = totalEstimatedTime - toBeDone;

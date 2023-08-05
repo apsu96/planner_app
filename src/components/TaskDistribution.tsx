@@ -16,13 +16,15 @@ const TaskDistribution = observer(({ date }: { date: Date }) => {
     );
     sortedTasks.map((task) => {
       if (task.category === TaskCategory.Work) {
-        calcWorkTime += task.duration.estimated;
+        calcWorkTime +=
+          task.duration.estimated.hours * 60 + task.duration.estimated.minutes;
       } else {
-        calcLeisureTime += task.duration.estimated;
+        calcLeisureTime +=
+          task.duration.estimated.hours * 60 + task.duration.estimated.minutes;
       }
     });
     setData([calcWorkTime, calcLeisureTime]);
-  }, [store.toDoList.length, date]);
+  }, [store.toDoList, store.toDoList.length, date]);
 
   return (
     <Container>

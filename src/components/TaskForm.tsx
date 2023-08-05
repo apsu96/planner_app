@@ -3,7 +3,6 @@ import {
   Input,
   Text,
   LargeButton,
-  CustomSelect,
   TimeInput,
   Title,
 } from "./UIKit.styled";
@@ -20,6 +19,7 @@ import { useState } from "react";
 import store, { TaskCategory } from "../Store";
 import uuid from "react-uuid";
 import moment from "moment";
+import Select from "./Select";
 
 function TaskForm({ date }: { date: Date }) {
   const initialTime = 0;
@@ -36,14 +36,16 @@ function TaskForm({ date }: { date: Date }) {
   }
 
   function submitTask() {
-    const estimatedTime = hours * 60 + minutes;
     const dateString = moment(date).format("LL");
     store.addTodo({
       id: uuid(),
       date: dateString,
       taskDescription,
       duration: {
-        estimated: estimatedTime,
+        estimated: {
+          hours,
+          minutes,
+        },
         real: 0,
       },
       category: category,
@@ -51,6 +53,10 @@ function TaskForm({ date }: { date: Date }) {
       isDone: false,
     });
     clearForm();
+  }
+
+  function selectCategoryValue(value: any) {
+    setCategory(value as TaskCategory);
   }
 
   return (
@@ -87,14 +93,14 @@ function TaskForm({ date }: { date: Date }) {
       <TaskFormRowContainer>
         <TaskFormLongColumnContainer>
           <Text>Category</Text>
-          <CustomSelect
-            placeholder="Select"
+          <Select
+            values={Object.values(TaskCategory)}
             value={category}
-            onChange={(e) => setCategory(e.target.value as TaskCategory)}
-          >
-            <option value={TaskCategory.Work}>Work</option>
-            <option value={TaskCategory.Leisure}>Leisure</option>
-          </CustomSelect>
+            setValue={selectCategoryValue}
+            renderValue={null}
+            disabled={false}
+            variant="taskForm"
+          />
         </TaskFormLongColumnContainer>
         <TaskFormShortColumnContainer>
           <LargeButton

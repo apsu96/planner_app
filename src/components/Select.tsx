@@ -1,36 +1,61 @@
-import { ReactNode } from "react";
-import { CustomOption, CustomSelect, OptionContainer } from "./Select.styled";
+import { ReactNode, useEffect, useRef, useState } from "react";
+import {
+  CustomOption,
+  CustomSelect,
+  OptionContainer,
+  OptionBox,
+} from "./Select.styled";
 import { SelectOption } from "@mui/base";
 import uuid from "react-uuid";
 
 const Select = ({
   values,
-  initialValue,
+  value,
   setValue,
   renderValue,
   disabled,
+  variant,
 }: {
   values: any[];
-  initialValue: any;
+  value: any;
   setValue: (value: any) => void;
   renderValue:
     | null
     | ((option: SelectOption<any> | null | SelectOption<any>[]) => ReactNode);
   disabled: boolean;
+  variant?: string | undefined;
 }) => {
+  const [boxWidth, setBoxWidth] = useState<number>();
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      setBoxWidth(ref.current.offsetWidth);
+    }
+  }, [ref.current]);
   return (
     <CustomSelect
+      ref={ref}
       label="Emotion"
-      value={initialValue}
+      value={value}
       onChange={(_, value) => {
         setValue(value);
       }}
-      slots={{ listbox: OptionContainer, root: "button" }}
+      slots={{
+        listbox: variant === "taskForm" ? OptionBox : OptionContainer,
+        root: "button",
+      }}
       renderValue={renderValue || undefined}
       disabled={disabled}
+      variant={variant}
     >
       {values.map((value) => (
-        <CustomOption value={value} key={uuid()}>
+        <CustomOption
+          value={value}
+          key={uuid()}
+          variant={variant}
+          customwidth={boxWidth}
+        >
           {value}
         </CustomOption>
       ))}
