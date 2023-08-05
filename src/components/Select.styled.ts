@@ -14,17 +14,35 @@ export const CustomSelect = styledMui(Select)`
     font-family: "OpenSans", sans-serif;
     font-size: 12px;
     font-weight: 400;
+    text-align: ${({
+      timetype,
+    }: {
+      variant: string | undefined;
+      timetype: string | undefined;
+      hideicon: string | undefined;
+    }) => (timetype === "true" ? "center" : "left")};
     margin-right: ${({ variant }: { variant: string | undefined }) =>
       variant === "taskForm" ? "0" : "6px"};
-    text-align: left;
+    max-width: ${({ timetype }: { timetype: string | undefined }) =>
+      timetype === "true" ? "80px" : "unset"};
     width: ${({ variant }: { variant: string | undefined }) =>
       variant === "taskForm" ? "100%" : "62px"};
     position: relative;
     cursor: pointer;
     border-radius: ${({ variant }: { variant: string | undefined }) =>
       variant === "taskForm" ? "12px" : "none"};
-    padding: ${({ variant }: { variant: string | undefined }) =>
-      variant === "taskForm" ? "16px 12px 16px 20px" : "none"};
+    padding: ${({
+      variant,
+      timetype,
+    }: {
+      variant: string | undefined;
+      timetype: string | undefined;
+    }) =>
+      timetype === "true"
+        ? "16px 20px"
+        : variant === "taskForm"
+        ? "16px 12px 16px 20px"
+        : "none"};
     @media (min-width: 1441px) {
         font-size: 14px;
         width: ${({ variant }: { variant: string | undefined }) =>
@@ -33,13 +51,24 @@ export const CustomSelect = styledMui(Select)`
     @media (max-width: 820px) {
         width:  ${({ variant }: { variant: string | undefined }) =>
           variant === "taskForm" ? "100%" : "24px"};
+        max-width: ${({ timetype }: { timetype: string | undefined }) =>
+          timetype === "true" ? "100%" : "unset"};
         margin: 0;
         padding: ${({ variant }: { variant: string | undefined }) =>
           variant === "taskForm" ? "16px 12px 16px 20px" : "0"};
     }
     ::after {
-        content: ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskForm"
+        content: ${({
+          variant,
+          hideicon,
+        }: {
+          variant: string | undefined;
+          hideicon: string | undefined;
+          timetype: string | undefined;
+        }) =>
+          hideicon === "true"
+            ? "none"
+            : variant === "taskForm"
             ? `url(${DownIcon})`
             : `url(${ArrowDownIcon})`};
         width: ${({ variant }: { variant: string | undefined }) =>
@@ -52,8 +81,16 @@ export const CustomSelect = styledMui(Select)`
         right: ${({ variant }: { variant: string | undefined }) =>
           variant === "taskForm" ? "12px" : "-10px"};
         @media (max-width: 820px) {
-            content: ${({ variant }: { variant: string | undefined }) =>
-              variant === "taskForm" ? `url(${DownIcon})` : "none"};
+            content: ${({
+              variant,
+              timetype,
+            }: {
+              variant: string | undefined;
+              timetype: string | undefined;
+            }) =>
+              variant === "taskForm" && timetype !== "true"
+                ? `url(${DownIcon})`
+                : "none"};
         }
         img {
             width: 24px;
@@ -68,11 +105,29 @@ export const CustomSelect = styledMui(Select)`
     &.${selectClasses.expanded} {
         border-radius: 12px 12px 0 0;
         &::after {
-          content: ${({ variant }: { variant: string | undefined }) =>
-            variant === "taskForm" ? `url(${UpIcon})` : `url(${ArrowUpIcon})`};;
+          content: ${({
+            variant,
+            hideicon,
+          }: {
+            variant: string | undefined;
+            hideicon: string | undefined;
+          }) =>
+            hideicon === "true"
+              ? "none"
+              : variant === "taskForm"
+              ? `url(${UpIcon})`
+              : `url(${ArrowUpIcon})`};;
           @media (max-width: 820px) {
-            content: ${({ variant }: { variant: string | undefined }) =>
-              variant === "taskForm" ? `url(${UpIcon})` : "none"};
+            content: ${({
+              variant,
+              timetype,
+            }: {
+              variant: string | undefined;
+              timetype: string | undefined;
+            }) =>
+              variant === "taskForm" && timetype !== "true"
+                ? `url(${UpIcon})`
+                : "none"};
         }
         }
       }
@@ -95,6 +150,20 @@ export const OptionBox = styled(OptionContainer)`
   padding: 0;
   margin: 0;
   gap: 12px;
+  max-height: 112px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 50%;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #eeddea;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f9f9f9;
+  }
 `;
 
 export const CustomOption = styledMui(Option)`
@@ -124,10 +193,19 @@ export const CustomOption = styledMui(Option)`
     }) => (customwidth ? customwidth - 20 + "px" : "auto")};
     padding-left: ${({
       customwidth,
+      timetype,
     }: {
       variant: string | undefined;
       customwidth: number | undefined;
-    }) => (customwidth ? "20px" : "none")};
+      timetype: string | undefined;
+    }) => (customwidth && timetype !== "true" ? "20px" : "12px")};
+    text-align: ${({
+      timetype,
+    }: {
+      timetype: string | undefined;
+      variant: string | undefined;
+      customwidth: number | undefined;
+    }) => (timetype === "true" ? "center" : "left")};
     @media (min-width: 1441px) {
         font-size: 14px;
     }

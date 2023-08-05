@@ -15,6 +15,8 @@ const Select = ({
   renderValue,
   disabled,
   variant,
+  hideIcon,
+  timeType,
 }: {
   values: any[];
   value: any;
@@ -24,6 +26,8 @@ const Select = ({
     | ((option: SelectOption<any> | null | SelectOption<any>[]) => ReactNode);
   disabled: boolean;
   variant?: string | undefined;
+  hideIcon?: boolean;
+  timeType?: boolean;
 }) => {
   const [boxWidth, setBoxWidth] = useState<number>();
   const ref = useRef<HTMLElement>(null);
@@ -48,6 +52,8 @@ const Select = ({
       renderValue={renderValue || undefined}
       disabled={disabled}
       variant={variant}
+      hideicon={hideIcon?.toString()}
+      timetype={timeType?.toString()}
     >
       {values.map((value) => (
         <CustomOption
@@ -55,6 +61,7 @@ const Select = ({
           key={uuid()}
           variant={variant}
           customwidth={boxWidth}
+          timetype={timeType?.toString()}
         >
           {value}
         </CustomOption>

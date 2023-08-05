@@ -1,11 +1,4 @@
-import {
-  Container,
-  Input,
-  Text,
-  LargeButton,
-  TimeInput,
-  Title,
-} from "./UIKit.styled";
+import { Container, Input, Text, LargeButton, Title } from "./UIKit.styled";
 import TimeIcon from "../images/TimeIcon.svg";
 import {
   TaskFormLongColumnContainer,
@@ -20,6 +13,8 @@ import store, { TaskCategory } from "../Store";
 import uuid from "react-uuid";
 import moment from "moment";
 import Select from "./Select";
+import { timeRange } from "../utils";
+import { SelectOption } from "@mui/base";
 
 function TaskForm({ date }: { date: Date }) {
   const initialTime = 0;
@@ -59,6 +54,38 @@ function TaskForm({ date }: { date: Date }) {
     setCategory(value as TaskCategory);
   }
 
+  function selectHours(value: any) {
+    setHours(+value);
+  }
+
+  function selectMinutes(value: any) {
+    setMinutes(+value);
+  }
+
+  function renderHoursValue(
+    option: SelectOption<any> | null | SelectOption<any>[],
+  ) {
+    if (option == null && hours === 0) {
+      return "00";
+    } else if (hours < 10) {
+      return "0" + hours;
+    } else {
+      return hours;
+    }
+  }
+
+  function renderMinutesValue(
+    option: SelectOption<any> | null | SelectOption<any>[],
+  ) {
+    if (option == null && minutes === 0) {
+      return "00";
+    } else if (minutes < 10) {
+      return "0" + minutes;
+    } else {
+      return minutes;
+    }
+  }
+
   return (
     <Container>
       <Title>Add your task</Title>
@@ -74,18 +101,26 @@ function TaskForm({ date }: { date: Date }) {
         <TaskFormShortColumnContainer>
           <Text>Duration (hh:mm)</Text>
           <RowContainer>
-            <TimeInput
-              placeholder="00"
-              type="number"
+            <Select
+              values={timeRange(1, 23)}
               value={hours}
-              onChange={(e) => setHours(+e.target.value)}
+              setValue={selectHours}
+              renderValue={renderHoursValue}
+              disabled={false}
+              variant="taskForm"
+              hideIcon={true}
+              timeType={true}
             />
             <TimeIconImage src={TimeIcon} alt="timeIcon" />
-            <TimeInput
-              placeholder="00"
-              type="number"
+            <Select
+              values={timeRange(1, 59)}
               value={minutes}
-              onChange={(e) => setMinutes(+e.target.value)}
+              setValue={selectMinutes}
+              renderValue={renderMinutesValue}
+              disabled={false}
+              variant="taskForm"
+              hideIcon={true}
+              timeType={true}
             />
           </RowContainer>
         </TaskFormShortColumnContainer>
