@@ -14,9 +14,9 @@ const PlanningTaskList = observer(({ date }: { date: Date }) => {
         <SmallText>{moment().format("dddd")}</SmallText>
       </PlanningColumn>
       <TasksContainer>
-        {store.toDoList.map((toDo) =>
+        {store.toDoList.map((toDo, index) =>
           toDo.date === moment(date).format("LL") ? (
-            <TaskLine key={uuid()} toDo={toDo} />
+            <TaskLine key={uuid()} toDo={toDo} index={index} />
           ) : null,
         )}
       </TasksContainer>

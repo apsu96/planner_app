@@ -96,6 +96,11 @@ export const Input = styled.input`
   }
 `;
 
+export const TaskLineInput = styled(Input)`
+  width: 50%;
+  padding: 0;
+`;
+
 export const TimeInput = styled.input`
   padding: 16px 20px;
   font-size: 12px;

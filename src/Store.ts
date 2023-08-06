@@ -51,6 +51,11 @@ class Store {
     if (tasks) this.toDoList = JSON.parse(tasks);
   }
 
+  setTaskDescription(index: number, taskDescription: string) {
+    this.toDoList[index].taskDescription = taskDescription;
+    this.updateLocalStorage();
+  }
+
   setEstimatedHours(id: string, hours: number) {
     this.toDoList = this.toDoList.map((toDo) =>
       toDo.id === id

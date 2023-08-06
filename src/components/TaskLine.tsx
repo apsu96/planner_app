@@ -1,12 +1,12 @@
 import {
   MoveButton,
   TaskLineContainer,
-  Text,
   ButtonsContainer,
   ActionIcon,
   BadgesContainer,
   CategoryContainer,
   TimeContainer,
+  TaskLineInput,
 } from "./UIKit.styled";
 import CloseIcon from "../images/CloseIcon.svg";
 import { ToDoType } from "../Store";
@@ -16,7 +16,7 @@ import { TaskCategory } from "../Store";
 import { timeRange } from "../utils";
 import { useState } from "react";
 
-const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
+const TaskLine = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   const formattedHours =
     toDo.duration.estimated.hours < 10
       ? "0" + toDo.duration.estimated.hours
@@ -28,6 +28,7 @@ const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
   const [hours, setHours] = useState(formattedHours);
   const [minutes, setMinutes] = useState(formattedMinutes);
   const [selectOpen, setSelectOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(toDo.taskDescription);
 
   function selectCategoryValue(value: any) {
     store.setTaskCategory(toDo.id, value);
@@ -51,6 +52,11 @@ const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
     }
   }
 
+  function changeTakDescription(value: string) {
+    setInputValue(value);
+    store.setTaskDescription(index, value);
+  }
+
   function renderTimeValue() {
     let hoursVal = "";
     if (+hours > 0) {
@@ -63,7 +69,10 @@ const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
   return (
     <TaskLineContainer>
       <MoveButton />
-      <Text>{toDo.taskDescription}</Text>
+      <TaskLineInput
+        value={inputValue}
+        onChange={(e) => changeTakDescription(e.target.value)}
+      />
       <BadgesContainer>
         <CategoryContainer>
           <Select
