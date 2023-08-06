@@ -13,13 +13,20 @@ import { ToDoType } from "../Store";
 import store from "../Store";
 import Select from "./Select";
 import { TaskCategory } from "../Store";
-import { observer } from "mobx-react-lite";
 import { timeRange } from "../utils";
 import { useState } from "react";
 
-const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
-  const [hours, setHours] = useState(toDo.duration.estimated.hours);
-  const [minutes, setMinutes] = useState(toDo.duration.estimated.minutes);
+const TaskLine = ({ toDo }: { toDo: ToDoType }) => {
+  const formattedHours =
+    toDo.duration.estimated.hours < 10
+      ? "0" + toDo.duration.estimated.hours
+      : toDo.duration.estimated.hours.toString();
+  const formattedMinutes =
+    toDo.duration.estimated.minutes < 10
+      ? "0" + toDo.duration.estimated.minutes
+      : toDo.duration.estimated.minutes.toString();
+  const [hours, setHours] = useState(formattedHours);
+  const [minutes, setMinutes] = useState(formattedMinutes);
   const [selectOpen, setSelectOpen] = useState(false);
 
   function selectCategoryValue(value: any) {
@@ -27,28 +34,29 @@ const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
   }
 
   function changeHours(value: string) {
-    setHours(+value);
-    // store.setEstimatedHours(toDo.id, +value);
+    if (value == null) return;
+    setHours(value);
+    if (value !== hours) {
+      store.setEstimatedHours(toDo.id, +value);
+    }
   }
 
   function changeMinutes(value: string) {
-    setMinutes(+value);
-    // store.setEstimatedMinutes(toDo.id, +value);
+    if (value == null) return;
+    setHours(value);
+    console.log(value);
+    if (value !== minutes) {
+      store.setEstimatedMinutes(toDo.id, +value);
+      setMinutes(value);
+    }
   }
 
   function renderTimeValue() {
     let hoursVal = "";
-    let minutesVal = "";
-    if (hours > 0) {
-      hoursVal = hours + " h ";
+    if (+hours > 0) {
+      hoursVal = +hours + " h ";
     }
-    if (minutes > 0 && minutes < 10) {
-      minutesVal = "0" + minutes.toString() + " min";
-    } else if (minutes >= 10) {
-      minutesVal = minutes + " min";
-    } else {
-      minutesVal = "00 min";
-    }
+    const minutesVal = +minutes + " min";
     return hoursVal + minutesVal;
   }
 
@@ -68,8 +76,8 @@ const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
         </CategoryContainer>
         <TimeContainer>
           <Select
-            values={timeRange(1, 24)}
-            value={hours.toString()}
+            values={timeRange(0, 23)}
+            value={hours}
             setValue={changeHours}
             renderValue={renderTimeValue}
             disabled={false}
@@ -80,7 +88,7 @@ const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
             onListboxOpenChange={(isOpen) => setSelectOpen(isOpen)}
           />
           <Select
-            values={timeRange(1, 60)}
+            values={timeRange(0, 59)}
             value={minutes}
             setValue={changeMinutes}
             renderValue={() => null}
@@ -102,6 +110,6 @@ const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
       </BadgesContainer>
     </TaskLineContainer>
   );
-});
+};
 
 export default TaskLine;
