@@ -14,25 +14,42 @@ import store from "../Store";
 import Select from "./Select";
 import { TaskCategory } from "../Store";
 import { observer } from "mobx-react-lite";
-import { range } from "../utils";
+import { timeRange } from "../utils";
 import { useState } from "react";
 
 const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
   const [hours, setHours] = useState(toDo.duration.estimated.hours);
   const [minutes, setMinutes] = useState(toDo.duration.estimated.minutes);
+  const [selectOpen, setSelectOpen] = useState(false);
 
   function selectCategoryValue(value: any) {
     store.setTaskCategory(toDo.id, value);
   }
 
-  function changeHours(value: number) {
-    setHours(value);
-    store.setEstimatedHours(toDo.id, value);
+  function changeHours(value: string) {
+    setHours(+value);
+    // store.setEstimatedHours(toDo.id, +value);
   }
 
-  function changeMinutes(value: number) {
-    setMinutes(value);
-    store.setEstimatedMinutes(toDo.id, value);
+  function changeMinutes(value: string) {
+    setMinutes(+value);
+    // store.setEstimatedMinutes(toDo.id, +value);
+  }
+
+  function renderTimeValue() {
+    let hoursVal = "";
+    let minutesVal = "";
+    if (hours > 0) {
+      hoursVal = hours + " h ";
+    }
+    if (minutes > 0 && minutes < 10) {
+      minutesVal = "0" + minutes.toString() + " min";
+    } else if (minutes >= 10) {
+      minutesVal = minutes + " min";
+    } else {
+      minutesVal = "00 min";
+    }
+    return hoursVal + minutesVal;
   }
 
   return (
@@ -51,18 +68,27 @@ const TaskLine = observer(({ toDo }: { toDo: ToDoType }) => {
         </CategoryContainer>
         <TimeContainer>
           <Select
-            values={range(1, 24)}
-            value={hours}
+            values={timeRange(1, 24)}
+            value={hours.toString()}
             setValue={changeHours}
-            renderValue={null}
+            renderValue={renderTimeValue}
             disabled={false}
+            hideIcon={true}
+            timeType={true}
+            variant="taskLine"
+            boxOpen={selectOpen}
+            onListboxOpenChange={(isOpen) => setSelectOpen(isOpen)}
           />
           <Select
-            values={range(1, 60)}
+            values={timeRange(1, 60)}
             value={minutes}
             setValue={changeMinutes}
-            renderValue={null}
+            renderValue={() => null}
             disabled={false}
+            timeType={true}
+            variant="hidden"
+            boxOpen={selectOpen}
+            onListboxOpenChange={(isOpen) => setSelectOpen(isOpen)}
           />
         </TimeContainer>
         <ButtonsContainer>

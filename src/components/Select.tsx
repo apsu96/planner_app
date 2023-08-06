@@ -4,6 +4,8 @@ import {
   CustomSelect,
   OptionContainer,
   OptionBox,
+  RTimeOptionBox,
+  LTimeOptionBox,
 } from "./Select.styled";
 import { SelectOption } from "@mui/base";
 import uuid from "react-uuid";
@@ -17,6 +19,8 @@ const Select = ({
   variant,
   hideIcon,
   timeType,
+  boxOpen,
+  onListboxOpenChange,
 }: {
   values: any[];
   value: any;
@@ -28,6 +32,8 @@ const Select = ({
   variant?: string | undefined;
   hideIcon?: boolean;
   timeType?: boolean;
+  boxOpen?: boolean;
+  onListboxOpenChange?: (isOpen: boolean) => void;
 }) => {
   const [boxWidth, setBoxWidth] = useState<number>();
   const ref = useRef<HTMLElement>(null);
@@ -46,7 +52,14 @@ const Select = ({
         setValue(value);
       }}
       slots={{
-        listbox: variant === "taskForm" ? OptionBox : OptionContainer,
+        listbox:
+          variant === "taskForm"
+            ? OptionBox
+            : variant === "taskLine"
+            ? LTimeOptionBox
+            : variant === "hidden"
+            ? RTimeOptionBox
+            : OptionContainer,
         root: "button",
       }}
       renderValue={renderValue || undefined}
@@ -54,6 +67,8 @@ const Select = ({
       variant={variant}
       hideicon={hideIcon?.toString()}
       timetype={timeType?.toString()}
+      listboxOpen={boxOpen}
+      onListboxOpenChange={onListboxOpenChange}
     >
       {values.map((value) => (
         <CustomOption

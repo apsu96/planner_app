@@ -15,18 +15,34 @@ export const CustomSelect = styledMui(Select)`
     font-size: 12px;
     font-weight: 400;
     text-align: ${({
+      variant,
       timetype,
     }: {
       variant: string | undefined;
       timetype: string | undefined;
       hideicon: string | undefined;
-    }) => (timetype === "true" ? "center" : "left")};
+    }) => (timetype === "true" && variant !== "taskLine" ? "center" : "left")};
     margin-right: ${({ variant }: { variant: string | undefined }) =>
-      variant === "taskForm" ? "0" : "6px"};
-    max-width: ${({ timetype }: { timetype: string | undefined }) =>
-      timetype === "true" ? "80px" : "unset"};
+      variant === "taskForm" || variant === "taskLine" || variant === "hidden"
+        ? "0"
+        : "6px"};
+    max-width: ${({
+      variant,
+      timetype,
+    }: {
+      variant: string | undefined;
+      timetype: string | undefined;
+    }) => (timetype === "true" && variant !== "taskLine" ? "80px" : "unset")};
     width: ${({ variant }: { variant: string | undefined }) =>
-      variant === "taskForm" ? "100%" : "62px"};
+      variant === "taskLine"
+        ? "82px"
+        : variant === "hidden"
+        ? "16px"
+        : variant === "taskForm"
+        ? "100%"
+        : "62px"};
+        height: ${({ variant }: { variant: string | undefined }) =>
+          variant === "hidden" ? "16px" : "none"};
     position: relative;
     cursor: pointer;
     border-radius: ${({ variant }: { variant: string | undefined }) =>
@@ -38,15 +54,23 @@ export const CustomSelect = styledMui(Select)`
       variant: string | undefined;
       timetype: string | undefined;
     }) =>
-      timetype === "true"
+      variant === "hidden"
+        ? "none"
+        : timetype === "true" && variant !== "taskLine"
         ? "16px 20px"
         : variant === "taskForm"
         ? "16px 12px 16px 20px"
-        : "none"};
+        : "0"};
     @media (min-width: 1441px) {
         font-size: 14px;
         width: ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskForm" ? "100%" : "71px"};
+          variant === "taskLine"
+            ? "none"
+            : variant === "taskForm" || variant === "taskLine"
+            ? "100%"
+            : variant === "hidden"
+            ? "0px"
+            : "71px"};
     }
     @media (max-width: 820px) {
         width:  ${({ variant }: { variant: string | undefined }) =>
@@ -166,6 +190,25 @@ export const OptionBox = styled(OptionContainer)`
   }
 `;
 
+export const LTimeOptionBox = styled(OptionBox)`
+  position: absolute;
+  top: 10px;
+  border-radius: 0 0 0 14px;
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+`;
+
+export const RTimeOptionBox = styled(OptionBox)`
+  position: absolute;
+  left: -35px;
+  top: 10px;
+  border-radius: 0 0 14px 0;
+  ::-webkit-scrollbar {
+    width: 1px;
+  }
+`;
+
 export const CustomOption = styledMui(Option)`
     list-style: none;
     color: ${({
@@ -186,19 +229,31 @@ export const CustomOption = styledMui(Option)`
     line-height: 24px;
     cursor: pointer;
     width: ${({
+      variant,
       customwidth,
     }: {
       variant: string | undefined;
       customwidth: number | undefined;
-    }) => (customwidth ? customwidth - 20 + "px" : "auto")};
+    }) =>
+      customwidth && (variant === "taskLine" || variant === "hidden")
+        ? "50px"
+        : customwidth
+        ? customwidth - 20 + "px"
+        : "auto"};
     padding-left: ${({
+      variant,
       customwidth,
       timetype,
     }: {
       variant: string | undefined;
       customwidth: number | undefined;
       timetype: string | undefined;
-    }) => (customwidth && timetype !== "true" ? "20px" : "12px")};
+    }) =>
+      customwidth && timetype !== "true"
+        ? "20px"
+        : variant === "taskLine" || variant === "hidden"
+        ? "0"
+        : "12px"};
     text-align: ${({
       timetype,
     }: {

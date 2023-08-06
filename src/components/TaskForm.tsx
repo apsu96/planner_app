@@ -102,7 +102,7 @@ function TaskForm({ date }: { date: Date }) {
           <Text>Duration (hh:mm)</Text>
           <RowContainer>
             <Select
-              values={timeRange(1, 23)}
+              values={timeRange(0, 23)}
               value={hours}
               setValue={selectHours}
               renderValue={renderHoursValue}
@@ -113,7 +113,7 @@ function TaskForm({ date }: { date: Date }) {
             />
             <TimeIconImage src={TimeIcon} alt="timeIcon" />
             <Select
-              values={timeRange(1, 59)}
+              values={timeRange(0, 59)}
               value={minutes}
               setValue={selectMinutes}
               renderValue={renderMinutesValue}

@@ -269,7 +269,7 @@ export const ActionIcon = styled.img`
 export const BadgesContainer = styled.div`
   margin-left: auto;
   display: flex;
-  gap: 5px;
+  gap: 15px;
   align-items: center;
   min-width: 201px;
   justify-content: flex-end;
@@ -289,12 +289,14 @@ export const ChartBox = styled.div`
 `;
 
 export const CategoryContainer = styled.div`
-  width: 41px;
+  /* width: 41px; */
 `;
 
 export const TimeContainer = styled.div`
-  width: 70px;
-  text-align: center;
+  /* width: 70px; */
+  /* text-align: center; */
+  display: flex;
+  align-items: center;
   @media (min-width: 1441px) {
     min-width: 100px;
   }
