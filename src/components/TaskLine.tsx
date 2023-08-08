@@ -45,7 +45,6 @@ const TaskLine = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
   function changeMinutes(value: string) {
     if (value == null) return;
     setHours(value);
-    console.log(value);
     if (value !== minutes) {
       store.setEstimatedMinutes(toDo.id, +value);
       setMinutes(value);

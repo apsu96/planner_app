@@ -200,7 +200,7 @@ export const OptionBox = styled(OptionContainer)`
   padding: 0;
   margin: 0;
   gap: 12px;
-  max-height: 98px;
+  max-height: 120px;
   overflow-y: auto;
   width: auto;
   ::-webkit-scrollbar {
@@ -225,6 +225,7 @@ export const LTimeOptionBox = styled(OptionBox)`
   gap: 1px;
   padding-top: 1px;
   padding-bottom: 1px;
+  max-height: 98px;
   ::-webkit-scrollbar {
     width: 1px;
     scroll-padding: 1em;
@@ -244,11 +245,9 @@ export const RTimeOptionBox = styled(OptionBox)`
   gap: 1px;
   padding-top: 1px;
   padding-bottom: 1px;
+  max-height: 98px;
   ::-webkit-scrollbar {
     width: 1px;
-    /* scroll-padding: 1em;
-    scroll-margin: 3em;
-    scroll-behavior: smooth; */
   }
   @media (max-width: 820px) {
     top: 0;

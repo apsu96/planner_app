@@ -80,6 +80,16 @@ export const Text = styled.p`
   }
 `;
 
+export const ColorText = styled.span`
+  color: #aa84a1;
+  font-size: 14px;
+  font-family: "OpenSans", sans-serif;
+  font-weight: 400;
+  @media (min-width: 1441px) {
+    font-size: 18px;
+  }
+`;
+
 export const Input = styled.input`
   padding: 16px 20px;
   font-size: 12px;
@@ -247,10 +257,15 @@ export const TaskLineContainer = styled.div`
 `;
 
 export const MoveButton = styled.div`
-  width: 3px;
+  min-width: 3px;
   height: 28px;
   background-color: #aa84a1;
   margin-right: 17px;
+`;
+
+export const LongMoveButton = styled(MoveButton)`
+  height: 80px;
+  margin: 14px 17px 14px 0;
 `;
 
 export const ButtonsContainer = styled.div`
@@ -304,4 +319,20 @@ export const TimeContainer = styled.div`
   @media (min-width: 1441px) {
     min-width: 100px;
   }
+`;
+
+export const StatisticsCardsContainer = styled.div`
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+`;
+
+export const StatisticsCardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 0px 20px 0px 0;
+  border-radius: 12px;
+  background: #f9f9f9;
+  width: 33.3%;
 `;

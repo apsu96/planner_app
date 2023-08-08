@@ -27,6 +27,12 @@ export enum Emotions {
   Bad = "Bad",
 }
 
+export enum TimePeriod {
+  LastWeek = "Last week",
+  LastMonth = "Last month",
+  LastYear = "Last year",
+}
+
 export const localStorageKey = "tasks";
 
 class Store {
