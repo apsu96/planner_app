@@ -99,6 +99,9 @@ export const Input = styled.input`
 export const TaskLineInput = styled(Input)`
   width: 50%;
   padding: 0;
+  @media (min-width: 1441px) {
+    width: auto;
+  }
 `;
 
 export const TimeInput = styled.input`
@@ -293,13 +296,9 @@ export const ChartBox = styled.div`
   }
 `;
 
-export const CategoryContainer = styled.div`
-  /* width: 41px; */
-`;
+export const CategoryContainer = styled.div``;
 
 export const TimeContainer = styled.div`
-  /* width: 70px; */
-  /* text-align: center; */
   display: flex;
   align-items: center;
   @media (min-width: 1441px) {

@@ -43,6 +43,8 @@ export const CustomSelect = styledMui(Select)`
         : "62px"};
         height: ${({ variant }: { variant: string | undefined }) =>
           variant === "hidden" ? "16px" : "none"};
+    height: ${({ variant }: { variant: string | undefined }) =>
+      variant === "hidden" ? "19px" : "none"};
     position: relative;
     cursor: pointer;
     border-radius: ${({ variant }: { variant: string | undefined }) =>
@@ -60,26 +62,42 @@ export const CustomSelect = styledMui(Select)`
         ? "16px 20px"
         : variant === "taskForm"
         ? "16px 12px 16px 20px"
-        : "0"};
+        : "none"};
     @media (min-width: 1441px) {
         font-size: 14px;
         width: ${({ variant }: { variant: string | undefined }) =>
           variant === "taskLine"
-            ? "none"
+            ? "auto"
             : variant === "taskForm" || variant === "taskLine"
             ? "100%"
             : variant === "hidden"
             ? "0px"
             : "71px"};
+            height: ${({ variant }: { variant: string | undefined }) =>
+              variant === "hidden" ? "21px" : "none"};
     }
     @media (max-width: 820px) {
         width:  ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskForm" ? "100%" : "24px"};
+          variant === "taskLine"
+            ? "66px"
+            : variant === "hidden"
+            ? "0"
+            : variant === "taskForm"
+            ? "100%"
+            : variant === "category"
+            ? "41px"
+            : "24px"};
         max-width: ${({ timetype }: { timetype: string | undefined }) =>
           timetype === "true" ? "100%" : "unset"};
         margin: 0;
         padding: ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskForm" ? "16px 12px 16px 20px" : "0"};
+          variant === "taskForm"
+            ? "16px 12px 16px 20px"
+            : variant === "category"
+            ? "0 0 0 5px"
+            : "0"};
+            height: ${({ variant }: { variant: string | undefined }) =>
+              variant === "hidden" ? "17px" : "none"};
     }
     ::after {
         content: ${({
@@ -158,24 +176,33 @@ export const CustomSelect = styledMui(Select)`
 `;
 
 export const OptionContainer = styled.ul`
-  border-radius: 16px;
-  padding: 10px 10px 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0 16px 16px;
+  margin: 10px 0;
+  padding: 0 5px;
+  background-color: #f9f9f9;
+  width: 77px;
   @media (max-width: 820px) {
     padding: 0 1Opx;
     margin: 0;
   }
 `;
 
+export const CategoryOptionContainer = styled(OptionContainer)`
+  @media (max-width: 820px) {
+    width: 43px;
+  }
+`;
+
 export const OptionBox = styled(OptionContainer)`
-  display: flex;
-  flex-direction: column;
   border-radius: 0 0 14px 14px;
-  background-color: #f9f9f9;
   padding: 0;
   margin: 0;
   gap: 12px;
-  max-height: 112px;
+  max-height: 98px;
   overflow-y: auto;
+  width: auto;
   ::-webkit-scrollbar {
     width: 6px;
     height: 50%;
@@ -186,7 +213,8 @@ export const OptionBox = styled(OptionContainer)`
   }
 
   ::-webkit-scrollbar-track {
-    background: #f9f9f9;
+    background: transparent;
+    background-clip: padding-box;
   }
 `;
 
@@ -194,8 +222,17 @@ export const LTimeOptionBox = styled(OptionBox)`
   position: absolute;
   top: 10px;
   border-radius: 0 0 0 14px;
+  gap: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   ::-webkit-scrollbar {
     width: 1px;
+    scroll-padding: 1em;
+    scroll-margin: 3em;
+    scroll-behavior: smooth;
+  }
+  @media (max-width: 820px) {
+    top: 0;
   }
 `;
 
@@ -204,8 +241,17 @@ export const RTimeOptionBox = styled(OptionBox)`
   left: -35px;
   top: 10px;
   border-radius: 0 0 14px 0;
+  gap: 1px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   ::-webkit-scrollbar {
     width: 1px;
+    /* scroll-padding: 1em;
+    scroll-margin: 3em;
+    scroll-behavior: smooth; */
+  }
+  @media (max-width: 820px) {
+    top: 0;
   }
 `;
 
@@ -220,12 +266,6 @@ export const CustomOption = styledMui(Option)`
     font-family: "OpenSans", sans-serif;
     font-size: 12px;
     font-weight: 500;
-    padding-bottom: ${({
-      variant,
-    }: {
-      variant: string | undefined;
-      customwidth: number | undefined;
-    }) => (variant === "taskForm" ? "none" : "6px")};
     line-height: 24px;
     cursor: pointer;
     width: ${({
@@ -242,18 +282,17 @@ export const CustomOption = styledMui(Option)`
         : "auto"};
     padding-left: ${({
       variant,
-      customwidth,
       timetype,
     }: {
       variant: string | undefined;
       customwidth: number | undefined;
       timetype: string | undefined;
     }) =>
-      customwidth && timetype !== "true"
+      variant === "taskForm" && timetype === "true"
+        ? "12px"
+        : variant === "taskForm"
         ? "20px"
-        : variant === "taskLine" || variant === "hidden"
-        ? "0"
-        : "12px"};
+        : "0"};
     text-align: ${({
       timetype,
     }: {
@@ -264,6 +303,15 @@ export const CustomOption = styledMui(Option)`
     @media (min-width: 1441px) {
         font-size: 14px;
     }
+    @media(max-width: 820px) {
+      width: ${({
+        variant,
+      }: {
+        variant: string | undefined;
+        customwidth: number | undefined;
+      }) => (variant === "taskLine" || variant === "hidden") && "33px"};
+    }
+
     &:hover {
         opacity: 0.8;
     }

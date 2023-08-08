@@ -6,6 +6,7 @@ import {
   OptionBox,
   RTimeOptionBox,
   LTimeOptionBox,
+  CategoryOptionContainer,
 } from "./Select.styled";
 import { SelectOption } from "@mui/base";
 import uuid from "react-uuid";
@@ -38,11 +39,23 @@ const Select = ({
   const [boxWidth, setBoxWidth] = useState<number>();
   const ref = useRef<HTMLElement>(null);
 
+  function handleResize() {
+    setBoxWidth(ref.current?.offsetWidth);
+  }
+
   useEffect(() => {
     if (ref.current) {
-      setBoxWidth(ref.current.offsetWidth);
+      handleResize();
     }
   }, [ref.current]);
+
+  useEffect(() => {
+    addEventListener("resize", handleResize);
+
+    return () => {
+      removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <CustomSelect
       ref={ref}
@@ -55,6 +68,8 @@ const Select = ({
         listbox:
           variant === "taskForm"
             ? OptionBox
+            : variant === "category"
+            ? CategoryOptionContainer
             : variant === "taskLine"
             ? LTimeOptionBox
             : variant === "hidden"

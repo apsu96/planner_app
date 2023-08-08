@@ -62,7 +62,7 @@ const TaskLine = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
     if (+hours > 0) {
       hoursVal = +hours + " h ";
     }
-    const minutesVal = +minutes + " min";
+    const minutesVal = minutes + " min";
     return hoursVal + minutesVal;
   }
 
@@ -81,6 +81,7 @@ const TaskLine = ({ toDo, index }: { toDo: ToDoType; index: number }) => {
             setValue={selectCategoryValue}
             renderValue={null}
             disabled={false}
+            variant="category"
           />
         </CategoryContainer>
         <TimeContainer>
