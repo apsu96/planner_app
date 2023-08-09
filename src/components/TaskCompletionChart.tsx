@@ -8,6 +8,7 @@ import moment from "moment";
 const TaskCompletionChart = observer(
   ({ sortedTasks }: { sortedTasks?: ToDoType[] }) => {
     const [data, setData] = useState<number[]>([]);
+    const [labels, setLabels] = useState<string[]>(["Done", "Pending"]);
 
     useEffect(() => {
       let done = 0;
@@ -32,12 +33,19 @@ const TaskCompletionChart = observer(
       });
       done = totalEstimatedTime - toBeDone;
       setData([done, toBeDone]);
+      const total = done + toBeDone;
+      const workPercent = Math.round((done * 100) / total);
+      const toBeDonePercent = 100 - workPercent;
+      setLabels([
+        "Done " + workPercent + "%",
+        "Pending " + toBeDonePercent + "%",
+      ]);
     }, [store, store.toDoList, sortedTasks]);
     return (
       <>
         <Title>Task Progress Tracker</Title>
         <ChartBox>
-          <DoughnutChart labels={["Done", "To be done"]} data={data} />
+          <DoughnutChart labels={labels} data={data} />
         </ChartBox>
       </>
     );

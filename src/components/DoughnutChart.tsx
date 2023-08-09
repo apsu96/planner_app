@@ -32,7 +32,7 @@ const DoughnutChart = ({
   const chartRef = useRef(null);
 
   const options: ChartOptions<"doughnut"> = {
-    cutout: 70,
+    cutout: 60,
     plugins: {
       legend: {
         position: "right",
@@ -40,6 +40,30 @@ const DoughnutChart = ({
           usePointStyle: true,
           pointStyle: "circle",
           padding: 37,
+          color: "#53514D",
+          font: {
+            size: 14,
+            family: "OpenSans, sans-serif",
+            weight: "500",
+          },
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            if (!context.formattedValue) {
+              return;
+            }
+            let hourVal = "";
+            let minutes = Number(context.formattedValue);
+            const hours = Math.floor(minutes / 60);
+            if (hours > 0) {
+              hourVal = hours + "h ";
+            }
+            minutes -= hours * 60;
+            const minVal = minutes + "min";
+            return hourVal + minVal;
+          },
         },
       },
     },
@@ -71,16 +95,16 @@ const DoughnutChart = ({
       return;
     }
     const chartColor = getGradient(chart);
-    setChartData((oldData) => ({
-      ...oldData,
+    setChartData({
+      labels: labels,
       datasets: [
         {
           data,
           backgroundColor: chartColor,
         },
       ],
-    }));
-  }, [chartRef.current, data]);
+    });
+  }, [chartRef.current, data, labels]);
 
   return <Doughnut ref={chartRef} options={options} data={chartData} />;
 };

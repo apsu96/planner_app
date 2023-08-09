@@ -8,6 +8,10 @@ import DoughnutChart from "./DoughnutChart";
 const TaskDistribution = observer(
   ({ date, sortedTasks }: { date: Date; sortedTasks?: ToDoType[] }) => {
     const [data, setData] = useState<number[]>([]);
+    const [labels, setLabels] = useState<string[]>([
+      TaskCategory.Work,
+      TaskCategory.Leisure,
+    ]);
 
     useEffect(() => {
       let calcWorkTime = 0;
@@ -32,16 +36,20 @@ const TaskDistribution = observer(
         }
       });
       setData([calcWorkTime, calcLeisureTime]);
+      const total = calcWorkTime + calcLeisureTime;
+      const workPercent = Math.round((calcWorkTime * 100) / total);
+      const leisurePercent = 100 - workPercent;
+      setLabels([
+        TaskCategory.Work + " " + workPercent + "%",
+        TaskCategory.Leisure + " " + leisurePercent + "%",
+      ]);
     }, [store.toDoList, store.toDoList.length, date, sortedTasks]);
 
     return (
       <Container>
         <Title>Allocation of time between work and rest</Title>
         <ChartBox>
-          <DoughnutChart
-            labels={[TaskCategory.Work, TaskCategory.Leisure]}
-            data={data}
-          />
+          <DoughnutChart labels={labels} data={data} />
         </ChartBox>
       </Container>
     );
