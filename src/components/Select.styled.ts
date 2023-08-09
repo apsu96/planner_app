@@ -66,9 +66,7 @@ export const CustomSelect = styledMui(Select)`
     @media (min-width: 1441px) {
         font-size: 14px;
         width: ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskLine"
-            ? "auto"
-            : variant === "taskForm" || variant === "taskLine"
+          variant === "taskForm" || variant === "taskLine"
             ? "100%"
             : variant === "hidden"
             ? "0px"

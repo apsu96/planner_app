@@ -8,7 +8,7 @@ export const ProfileContainer = styled.div`
   box-sizing: border-box;
   padding: ${({ isMobile }: { isMobile: boolean }) =>
     isMobile ? "57px 0 0 20px" : "32px 0 0 40px"};
-  disply: flex;
+  display: flex;
   flex-direction: column;
   min-height: 100vh;
   box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.06);
@@ -29,6 +29,9 @@ export const Username = styled.p`
   line-height: 19px;
   color: #53514d;
   margin: 0;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const Status = styled.p`
@@ -38,6 +41,9 @@ export const Status = styled.p`
   line-height: 16px;
   color: #979797;
   margin: 0;
+  @media (min-width: 1441px) {
+    font-size: 14px;
+  }
 `;
 
 export const MenuContainer = styled.div`
@@ -75,6 +81,9 @@ export const MenuItem = styled(Link)`
     background: rgba(170, 132, 161, 0.1);
     border-radius: 5px;
   }
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const MenuIconContainer = styled.div`
@@ -89,4 +98,14 @@ export const MobileLogoContainer = styled.div`
   align-items: center;
   gap: 20px;
   padding-right: 27px;
+`;
+
+export const AvatarContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
 `;

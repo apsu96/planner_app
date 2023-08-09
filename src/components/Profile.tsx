@@ -7,9 +7,10 @@ import {
   MenuItem,
   MenuIconContainer,
   MobileLogoContainer,
+  AvatarContainer,
 } from "./Profile.styled";
 import Logo from "../images/Logo.svg";
-import Avatar from "../images/Avatar.svg";
+import Avatar from "../images/Avatar.png";
 import PlanningIcon from "../images/Planning_icon";
 import TasksIcon from "../images/Tasks_icon";
 import StatisticsIcon from "../images/Statistics_icon";
@@ -47,10 +48,12 @@ function Profile({ currentView, isMobile, toggleMenu }: ProfileProps) {
         </MobileLogoContainer>
       )}
       <AvatarUsernameContainer>
-        <img src={Avatar} alt="avatar" />
+        <AvatarContainer>
+          <img src={Avatar} alt="avatar" width={32} height={32} />
+        </AvatarContainer>
         <div>
-          <Username>Ann Jonson</Username>
-          <Status>Online</Status>
+          <Username>Local Storage</Username>
+          <Status>Offline</Status>
         </div>
       </AvatarUsernameContainer>
       <MenuContainer>

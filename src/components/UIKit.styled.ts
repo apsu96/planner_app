@@ -44,6 +44,9 @@ export const PageTitle = styled.p`
   font-size: 14px;
   line-height: 19px;
   color: #53514d;
+  @media (min-width: 1441px) {
+    font-size: 16px;
+  }
 `;
 
 export const Container = styled.div`
