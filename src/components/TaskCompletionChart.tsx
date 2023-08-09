@@ -1,12 +1,24 @@
 import { observer } from "mobx-react-lite";
 import DoughnutChart from "./DoughnutChart";
 import { ChartBox, Title } from "./UIKit.styled";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import store, { ToDoType } from "../Store";
 import moment from "moment";
+import StatisticsCard from "./StatisticsCard";
+import { statisticsInfoCards } from "../const";
 
 const TaskCompletionChart = observer(
-  ({ sortedTasks }: { sortedTasks?: ToDoType[] }) => {
+  ({
+    sortedTasks,
+    doneTasks,
+    setDoneTasks,
+    isMobile,
+  }: {
+    sortedTasks?: ToDoType[];
+    doneTasks?: string;
+    setDoneTasks?: React.Dispatch<React.SetStateAction<string>>;
+    isMobile?: boolean;
+  }) => {
     const [data, setData] = useState<number[]>([]);
     const [labels, setLabels] = useState<string[]>(["Done", "Pending"]);
 
@@ -35,6 +47,9 @@ const TaskCompletionChart = observer(
       setData([done, toBeDone]);
       const total = done + toBeDone;
       const workPercent = Math.round((done * 100) / total);
+      if (setDoneTasks) {
+        setDoneTasks(workPercent + "%");
+      }
       const toBeDonePercent = 100 - workPercent;
       setLabels([
         "Done " + workPercent + "%",
@@ -47,6 +62,9 @@ const TaskCompletionChart = observer(
         <ChartBox>
           <DoughnutChart labels={labels} data={data} />
         </ChartBox>
+        {isMobile && doneTasks && (
+          <StatisticsCard text={statisticsInfoCards.first} value={doneTasks} />
+        )}
       </>
     );
   },

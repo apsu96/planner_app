@@ -1,30 +1,16 @@
 import moment from "moment";
 import { TimePeriod } from "./Store";
 
-export interface CardType {
-  text: string;
-  value: string;
-}
-
 export interface InfoCardsType {
-  first: CardType;
-  second: CardType;
-  third: CardType;
+  first: string;
+  second: string;
+  third: string;
 }
 
 export const statisticsInfoCards: InfoCardsType = {
-  first: {
-    text: "Your tasks were completed by ",
-    value: "",
-  },
-  second: {
-    text: "Most of the tasks you completed related to ",
-    value: "",
-  },
-  third: {
-    text: "For most tasks you finished, you felt ",
-    value: "",
-  },
+  first: "Your tasks were completed by ",
+  second: "Most of the tasks you completed related to ",
+  third: "For most tasks you finished, you felt ",
 };
 
 export function getTargetDay(period: TimePeriod) {

@@ -266,6 +266,10 @@ export const MoveButton = styled.div`
 export const LongMoveButton = styled(MoveButton)`
   height: 80px;
   margin: 14px 17px 14px 0;
+  @media (max-width: 820px) {
+    height: 40px;
+    margin: 15px 17px 15px 0;
+  }
 `;
 
 export const ButtonsContainer = styled.div`
@@ -335,4 +339,7 @@ export const StatisticsCardContainer = styled.div`
   border-radius: 12px;
   background: #f9f9f9;
   width: 33.3%;
+  @media (max-width: 820px) {
+    width: auto;
+  }
 `;

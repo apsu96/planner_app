@@ -1,5 +1,5 @@
 import React from "react";
-import { TimePeriod } from "../Store";
+import { Emotions, TaskCategory, TimePeriod } from "../Store";
 import { TaskFormLongColumnContainer } from "./TaskForm.styled";
 import {
   Container,
@@ -9,9 +9,8 @@ import {
 } from "./UIKit.styled";
 import Select from "./Select";
 import styled from "styled-components";
-import { useMediaQuery } from "@mui/material";
 import StatisticsCard from "./StatisticsCard";
-import { CardType, statisticsInfoCards } from "../const";
+import { statisticsInfoCards } from "../const";
 import uuid from "react-uuid";
 
 const TimePeriodContainer = styled(TaskFormLongColumnContainer)`
@@ -21,11 +20,18 @@ const TimePeriodContainer = styled(TaskFormLongColumnContainer)`
 const StatisticsInfo = ({
   timePeriod,
   setTimePeriod,
+  doneTasks,
+  category,
+  emotion,
+  isMobile,
 }: {
   timePeriod: TimePeriod;
   setTimePeriod: React.Dispatch<React.SetStateAction<TimePeriod>>;
+  doneTasks: string;
+  category: TaskCategory;
+  emotion: Emotions;
+  isMobile: boolean;
 }) => {
-  const isMobile = useMediaQuery("(max-width:820px)");
   return (
     <Container>
       <Title>Take a moment to examine your progress</Title>
@@ -43,11 +49,17 @@ const StatisticsInfo = ({
       {!isMobile && (
         <StatisticsCardsContainer>
           {Object.entries(statisticsInfoCards).map(
-            ([, value]: [string, CardType]) => (
+            ([keyName, value]: [string, string]) => (
               <StatisticsCard
                 key={uuid()}
-                text={value.text}
-                value={value.value}
+                text={value}
+                value={
+                  keyName === "first"
+                    ? doneTasks
+                    : keyName === "second"
+                    ? category
+                    : emotion
+                }
               />
             ),
           )}
