@@ -1,8 +1,4 @@
-import {
-  MyDayColumnContainer,
-  MyDayContainer,
-  MyDayRowContainer,
-} from "./MyDay.styled";
+import { MyDayColumnContainer, MyDayContainer } from "./MyDay.styled";
 import { Container } from "../components/UIKit.styled";
 import TaskList from "../components/TaskList";
 import TaskCompletionChart from "../components/TaskCompletionChart";
@@ -16,19 +12,15 @@ const ChartContainer = styled(Container)`
 function MyDay() {
   return (
     <MyDayContainer>
-      <MyDayRowContainer>
-        <TaskList />
-      </MyDayRowContainer>
-      <MyDayRowContainer>
-        <MyDayColumnContainer>
-          <ChartContainer>
-            <TaskCompletionChart />
-          </ChartContainer>
-          <ChartContainer>
-            <EmotionalStateChart />
-          </ChartContainer>
-        </MyDayColumnContainer>
-      </MyDayRowContainer>
+      <TaskList />
+      <MyDayColumnContainer>
+        <ChartContainer>
+          <TaskCompletionChart />
+        </ChartContainer>
+        <ChartContainer>
+          <EmotionalStateChart />
+        </ChartContainer>
+      </MyDayColumnContainer>
     </MyDayContainer>
   );
 }

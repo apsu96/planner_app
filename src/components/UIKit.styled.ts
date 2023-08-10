@@ -1,41 +1,43 @@
 import styled from "styled-components";
 
 export const AppContainer = styled.div`
+  display: flex;
   min-height: 100vh;
   max-width: 100vw;
   width: 100%;
   background-color: #f9f9f9;
-  display: flex;
-`;
-
-export const DrawerContainer = styled.div`
-  display: ${({ visible }: { visible: boolean }) =>
-    visible ? "flex" : "none"};
-  max-width: 242px;
-  width: ${({ visible, isMobile }: { visible: boolean; isMobile: boolean }) =>
-    visible && isMobile ? "none" : "100%"};
-  box-sizing: border-box;
 `;
 
 export const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: ${({ isMobile }: { isMobile: boolean }) =>
-    isMobile ? "68px 20px 40px" : "40px 40px 44px 30px"};
+    isMobile ? "68px 20px 40px" : "40px 40px 40px 30px"};
   gap: ${({ isMobile }: { isMobile: boolean }) => (isMobile ? "20px" : "28px")};
-  width: 100%;
+  width: calc(100vw - 242px);
+  height: 100vh;
+  overflow-y: auto;
+  @media (max-width: 820px) {
+    width: 100%;
+  }
 `;
 
 export const MobileMenuContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 `;
 
 export const PageTitleContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  @media (max-width: 820px) {
+    width: auto;
+  }
 `;
 
 export const PageTitle = styled.p`
@@ -44,6 +46,7 @@ export const PageTitle = styled.p`
   font-size: 14px;
   line-height: 19px;
   color: #53514d;
+  text-align: left;
   @media (min-width: 1441px) {
     font-size: 16px;
   }
@@ -56,12 +59,17 @@ export const Container = styled.div`
   background-color: white;
   min-width: 549px;
   width: 100%;
+  min-height: 354px;
+  height: 100%;
   box-sizing: border-box;
   margin: 0 auto;
   flex-direction: column;
   @media (max-width: 1420px) {
     min-width: 335px;
     padding: 20px;
+  }
+  @media (max-width: 820px) {
+    min-height: auto;
   }
 `;
 

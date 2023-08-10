@@ -1,4 +1,4 @@
-import { Container, PlanningRow } from "./Planning.styled";
+import { Container } from "./Planning.styled";
 import TaskCompletionChart from "../components/TaskCompletionChart";
 import TaskDistribution from "../components/TaskDistribution";
 import EmotionalStateChart from "../components/EmotionalStateChart";
@@ -28,41 +28,37 @@ function Statistics() {
 
   return (
     <Container>
-      <PlanningRow>
-        <StatisticsInfo
-          timePeriod={timePeriod}
-          setTimePeriod={setTimePeriod}
-          doneTasks={doneTasks}
-          category={category}
-          emotion={emotion}
-          isMobile={isMobile}
-        />
-        <UIContainer>
-          <TaskCompletionChart
-            sortedTasks={sortedTasks}
-            doneTasks={doneTasks}
-            setDoneTasks={setDoneTasks}
-            isMobile={isMobile}
-          />
-        </UIContainer>
-      </PlanningRow>
-      <PlanningRow>
-        <TaskDistribution
-          date={new Date()}
+      <StatisticsInfo
+        timePeriod={timePeriod}
+        setTimePeriod={setTimePeriod}
+        doneTasks={doneTasks}
+        category={category}
+        emotion={emotion}
+        isMobile={isMobile}
+      />
+      <UIContainer>
+        <TaskCompletionChart
           sortedTasks={sortedTasks}
-          category={category}
-          setCategory={setCategory}
+          doneTasks={doneTasks}
+          setDoneTasks={setDoneTasks}
           isMobile={isMobile}
         />
-        <UIContainer>
-          <EmotionalStateChart
-            sortedTasks={sortedTasks}
-            emotion={emotion}
-            setEmotion={setEmotion}
-            isMobile={isMobile}
-          />
-        </UIContainer>
-      </PlanningRow>
+      </UIContainer>
+      <TaskDistribution
+        date={new Date()}
+        sortedTasks={sortedTasks}
+        category={category}
+        setCategory={setCategory}
+        isMobile={isMobile}
+      />
+      <UIContainer>
+        <EmotionalStateChart
+          sortedTasks={sortedTasks}
+          emotion={emotion}
+          setEmotion={setEmotion}
+          isMobile={isMobile}
+        />
+      </UIContainer>
     </Container>
   );
 }

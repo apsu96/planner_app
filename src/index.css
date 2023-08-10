@@ -1,10 +1,14 @@
-body {
-    margin: 0;
-    font-family: 'OpenSans', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-  
+*,
+body,
 code {
-    font-family: 'OpenSans', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "OpenSans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "OpenSans", sans-serif;
 }

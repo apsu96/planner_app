@@ -125,7 +125,7 @@ function TaskForm({ date }: { date: Date }) {
           </RowContainer>
         </TaskFormShortColumnContainer>
       </TaskFormRowMContainer>
-      <TaskFormRowContainer>
+      <TaskFormRowContainer style={{ marginTop: "12px" }}>
         <TaskFormLongColumnContainer>
           <Text>Category</Text>
           <Select

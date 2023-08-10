@@ -12,7 +12,6 @@ import StatisticsIcon from "./images/Statistics_icon";
 import PlanningIcon from "./images/Planning_icon";
 import {
   AppContainer,
-  DrawerContainer,
   MobileMenuContainer,
   PageContainer,
   PageTitle,
@@ -81,36 +80,32 @@ function App() {
 
   return (
     <AppContainer>
-      <DrawerContainer visible={isMobile && isDrawerOpen} isMobile={isMobile}>
-        <Drawer
-          variant="temporary"
-          open={isDrawerOpen}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{ display: isMobile ? "block" : "none" }}
-          onClose={toggleMenu}
-        >
-          <Profile
-            currentView={currentView}
-            isMobile={true}
-            toggleMenu={toggleMenu}
-          />
-        </Drawer>
-      </DrawerContainer>
-      <DrawerContainer visible={!isMobile} isMobile={isMobile}>
-        <Drawer
-          variant="permanent"
-          open={!isMobile}
-          sx={{ display: !isMobile ? "block" : "none" }}
-        >
-          <Profile
-            currentView={currentView}
-            isMobile={false}
-            toggleMenu={toggleMenu}
-          />
-        </Drawer>
-      </DrawerContainer>
+      <Drawer
+        variant="temporary"
+        open={isDrawerOpen}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{ display: isMobile ? "block" : "none" }}
+        onClose={toggleMenu}
+      >
+        <Profile
+          currentView={currentView}
+          isMobile={true}
+          toggleMenu={toggleMenu}
+        />
+      </Drawer>
+      <Drawer
+        variant="permanent"
+        open={!isMobile}
+        sx={{ display: !isMobile ? "block" : "none", width: "242px" }}
+      >
+        <Profile
+          currentView={currentView}
+          isMobile={false}
+          toggleMenu={toggleMenu}
+        />
+      </Drawer>
       <PageContainer isMobile={isMobile}>
         {isMobile ? (
           <MobileMenuContainer>

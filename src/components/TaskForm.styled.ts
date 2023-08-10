@@ -22,6 +22,7 @@ export const TaskFormLongColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
+  gap: 4px;
   @media (max-width: 820px) {
     width: 100%;
   }

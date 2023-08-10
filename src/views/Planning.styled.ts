@@ -2,21 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 100%;
-  height: 100%;
-  display: flex;
+  height: calc(100vh - 88px - 44px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-row-gap: 30px;
+  grid-column-gap: 20px;
   flex-direction: column;
   gap: 20px;
   box-sizing: border-box;
-`;
-
-export const PlanningRow = styled.div`
-  display: flex;
-  height: 50%;
-  gap: 30px;
-  box-sizing: border-box;
   @media (max-width: 1420px) {
-    flex-direction: column;
-    gap: 20px;
-    height: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(1fr);
   }
 `;
