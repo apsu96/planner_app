@@ -67,8 +67,8 @@ const TaskDistribution = observer(
       const workPercent = Math.round((calcWorkTime * 100) / total);
       const leisurePercent = 100 - workPercent;
       setLabels([
-        TaskCategory.Work + " " + workPercent + "%",
-        TaskCategory.Leisure + " " + leisurePercent + "%",
+        TaskCategory.Work + " " + (workPercent || "0") + "%",
+        TaskCategory.Leisure + " " + (leisurePercent || "0") + "%",
       ]);
     }, [store.toDoList, store.toDoList.length, date, sortedTasks]);
 

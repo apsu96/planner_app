@@ -5,9 +5,42 @@ import {
   Tooltip,
   Legend,
   ChartData,
+  ChartOptions,
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import type { ChartOptions } from "chart.js";
+import type { Plugin } from "chart.js";
+
+const plugin: Plugin<"doughnut"> = {
+  id: "empty",
+  afterDraw(chart: ChartJS) {
+    const { datasets } = chart.data;
+    let totalSum = 0;
+    datasets.map((dataset) => {
+      dataset.data.map((val) => {
+        totalSum += Number(val);
+      });
+    });
+
+    if (totalSum == 0) {
+      const {
+        chartArea: { left, top, right, bottom },
+        ctx,
+      } = chart;
+      const centerX = (left + right) / 2;
+      const centerY = (top + bottom) / 2;
+      const r = Math.min(right - left, bottom - top) / 2;
+
+      ctx.beginPath();
+      ctx.fillStyle = "#f9f9f9";
+      ctx.arc(centerX, centerY, r, 0, 2 * Math.PI);
+      ctx.fill();
+
+      ctx.fillStyle = "#979797";
+      ctx.font = "14px 'OpenSans,sans-serif'";
+      ctx.fillText("Empty...", chart.width / 5, chart.height / 2);
+    }
+  },
+};
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -50,7 +83,7 @@ const DoughnutChart = ({
       },
       tooltip: {
         callbacks: {
-          label: function (context) {
+          label: function (context: { formattedValue: any }) {
             if (!context.formattedValue) {
               return;
             }
@@ -106,7 +139,14 @@ const DoughnutChart = ({
     });
   }, [chartRef.current, data, labels]);
 
-  return <Doughnut ref={chartRef} options={options} data={chartData} />;
+  return (
+    <Doughnut
+      ref={chartRef}
+      options={options}
+      data={chartData}
+      plugins={[plugin]}
+    />
+  );
 };
 
 export default DoughnutChart;
