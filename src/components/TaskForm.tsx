@@ -88,7 +88,7 @@ function TaskForm({ date }: { date: Date }) {
 
   return (
     <Container>
-      <Title>Add your task</Title>
+      <Title>Schedule your task</Title>
       <TaskFormRowMContainer>
         <TaskFormLongColumnContainer>
           <Text>Task</Text>

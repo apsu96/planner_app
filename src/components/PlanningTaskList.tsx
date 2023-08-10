@@ -5,8 +5,12 @@ import { observer } from "mobx-react-lite";
 import store from "../Store";
 import uuid from "react-uuid";
 import TaskLine from "./TaskLine";
+import NoTask from "./NoTask";
 
 const PlanningTaskList = observer(({ date }: { date: Date }) => {
+  const sortedList = store.toDoList.filter(
+    (toDo) => toDo.date === moment(date).format("LL"),
+  );
   return (
     <Container>
       <PlanningColumn>
@@ -14,6 +18,7 @@ const PlanningTaskList = observer(({ date }: { date: Date }) => {
         <SmallText>{moment().format("dddd")}</SmallText>
       </PlanningColumn>
       <TasksContainer>
+        {sortedList.length === 0 && <NoTask />}
         {store.toDoList.map((toDo, index) =>
           toDo.date === moment(date).format("LL") ? (
             <TaskLine key={uuid()} toDo={toDo} index={index} />
