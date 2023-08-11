@@ -5,7 +5,7 @@ import EmotionalStateChart from "../components/EmotionalStateChart";
 import StatisticsInfo from "../components/StatisticsInfo";
 import { Container as UIContainer } from "../components/UIKit.styled";
 import { useEffect, useState } from "react";
-import store, { Emotions, TaskCategory, TimePeriod, ToDoType } from "../Store";
+import store, { TimePeriod, ToDoType } from "../Store";
 import { getTargetDay } from "../const";
 import moment from "moment";
 import { useMediaQuery } from "@mui/material";
@@ -14,8 +14,8 @@ function Statistics() {
   const [timePeriod, setTimePeriod] = useState(TimePeriod.LastWeek);
   const [sortedTasks, setSortedTasks] = useState<ToDoType[]>([]);
   const [doneTasks, setDoneTasks] = useState<string>("");
-  const [category, setCategory] = useState<TaskCategory>(TaskCategory.Work);
-  const [emotion, setEmotion] = useState<Emotions>(Emotions.Excellent);
+  const [category, setCategory] = useState<string | undefined>(undefined);
+  const [emotions, setEmotions] = useState<string | undefined>(undefined);
   const isMobile = useMediaQuery("(max-width:820px)");
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Statistics() {
         setTimePeriod={setTimePeriod}
         doneTasks={doneTasks}
         category={category}
-        emotion={emotion}
+        emotions={emotions}
         isMobile={isMobile}
       />
       <UIContainer>
@@ -54,8 +54,8 @@ function Statistics() {
       <UIContainer>
         <EmotionalStateChart
           sortedTasks={sortedTasks}
-          emotion={emotion}
-          setEmotion={setEmotion}
+          emotions={emotions}
+          setEmotion={setEmotions}
           isMobile={isMobile}
         />
       </UIContainer>

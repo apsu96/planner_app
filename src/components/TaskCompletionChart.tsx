@@ -45,17 +45,19 @@ const TaskCompletionChart = observer(
       });
       done = totalEstimatedTime - toBeDone;
       setData([done, toBeDone]);
-      const total = done + toBeDone;
-      const workPercent = Math.round((done * 100) / total);
+      const workPercent =
+        totalEstimatedTime !== 0
+          ? Math.round((done * 100) / totalEstimatedTime)
+          : 0;
       if (setDoneTasks) {
-        setDoneTasks(workPercent + "%");
+        setDoneTasks((workPercent || 0) + "%");
       }
-      const toBeDonePercent = 100 - workPercent;
+      const toBeDonePercent = totalEstimatedTime !== 0 ? 100 - workPercent : 0;
       setLabels([
         "Done " + workPercent + "%",
         "Pending " + toBeDonePercent + "%",
       ]);
-    }, [store, store.toDoList, sortedTasks]);
+    }, [store, store.toDoList, sortedTasks, setDoneTasks]);
     return (
       <>
         <Title>Task Progress Tracker</Title>
@@ -63,7 +65,10 @@ const TaskCompletionChart = observer(
           <DoughnutChart labels={labels} data={data} />
         </ChartBox>
         {isMobile && doneTasks && (
-          <StatisticsCard text={statisticsInfoCards.first} value={doneTasks} />
+          <StatisticsCard
+            text={statisticsInfoCards.performance}
+            value={doneTasks}
+          />
         )}
       </>
     );

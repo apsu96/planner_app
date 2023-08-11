@@ -6,17 +6,18 @@ import moment from "moment";
 import { observer } from "mobx-react-lite";
 import StatisticsCard from "./StatisticsCard";
 import { statisticsInfoCards } from "../const";
+import { compareEmotions } from "../utils";
 
 const EmotionalStateChart = observer(
   ({
     sortedTasks,
-    emotion,
+    emotions,
     setEmotion,
     isMobile,
   }: {
     sortedTasks?: ToDoType[];
-    emotion?: Emotions;
-    setEmotion?: React.Dispatch<React.SetStateAction<Emotions>>;
+    emotions?: string | undefined;
+    setEmotion?: React.Dispatch<React.SetStateAction<string | undefined>>;
     isMobile?: boolean;
   }) => {
     const [data, setData] = useState<number[]>([]);
@@ -47,28 +48,26 @@ const EmotionalStateChart = observer(
           badTime += toDo.duration.real;
         }
       });
-      setData([excellentTime, normalTime, badTime]);
+      const data = [excellentTime, normalTime, badTime];
+      setData(data);
       if (setEmotion) {
-        setEmotion(() =>
-          excellentTime > normalTime && excellentTime > badTime
-            ? Emotions.Excellent
-            : normalTime > excellentTime && normalTime > badTime
-            ? Emotions.Normal
-            : Emotions.Bad,
-        );
+        const result = compareEmotions(data);
+        setEmotion(result);
       }
       const total = excellentTime + normalTime + badTime;
-      const excellentPercent = Math.round((excellentTime * 100) / total);
-      const normalPercent = Math.round((normalTime * 100) / total);
-      const badPercent = 100 - excellentPercent - normalPercent;
-      if (excellentPercent || normalPercent || badPercent) {
-        setLabels([
-          Emotions.Excellent + " " + excellentPercent + "%",
-          Emotions.Normal + " " + normalPercent + "%",
-          Emotions.Bad + " " + badPercent + "%",
-        ]);
-      }
-    }, [store, store.toDoList, sortedTasks]);
+      const excellentPercent =
+        total !== 0 ? Math.round((excellentTime * 100) / total) : 0;
+      const normalPercent =
+        total !== 0 ? Math.round((normalTime * 100) / total) : 0;
+      const badPercent =
+        total !== 0 ? 100 - excellentPercent - normalPercent : 0;
+
+      setLabels([
+        Emotions.Excellent + " " + excellentPercent + "%",
+        Emotions.Normal + " " + normalPercent + "%",
+        Emotions.Bad + " " + badPercent + "%",
+      ]);
+    }, [store, store.toDoList, sortedTasks, setEmotion]);
 
     return (
       <>
@@ -76,8 +75,8 @@ const EmotionalStateChart = observer(
         <ChartBox>
           <DoughnutChart labels={labels} data={data} />
         </ChartBox>
-        {isMobile && emotion && (
-          <StatisticsCard text={statisticsInfoCards.third} value={emotion} />
+        {isMobile && emotions && (
+          <StatisticsCard text={statisticsInfoCards.emotion} value={emotions} />
         )}
       </>
     );

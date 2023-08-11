@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import DoughnutChart from "./DoughnutChart";
 import StatisticsCard from "./StatisticsCard";
 import { statisticsInfoCards } from "../const";
+import { compareTaskCategory } from "../utils";
 
 const TaskDistribution = observer(
   ({
@@ -17,8 +18,8 @@ const TaskDistribution = observer(
   }: {
     date: Date;
     sortedTasks?: ToDoType[];
-    category?: TaskCategory;
-    setCategory?: React.Dispatch<React.SetStateAction<TaskCategory>>;
+    category?: string | undefined;
+    setCategory?: React.Dispatch<React.SetStateAction<string | undefined>>;
     isMobile?: boolean;
   }) => {
     const [data, setData] = useState<number[]>([]);
@@ -55,13 +56,11 @@ const TaskDistribution = observer(
           }
         });
       }
-      setData([calcWorkTime, calcLeisureTime]);
+      const data = [calcWorkTime, calcLeisureTime];
+      setData(data);
       if (setCategory) {
-        setCategory(() =>
-          calcWorkTime > calcLeisureTime
-            ? TaskCategory.Work
-            : TaskCategory.Leisure,
-        );
+        const result = compareTaskCategory(data);
+        setCategory(result);
       }
       const total = calcWorkTime + calcLeisureTime;
       const workPercent = Math.round((calcWorkTime * 100) / total);
@@ -70,7 +69,7 @@ const TaskDistribution = observer(
         TaskCategory.Work + " " + (workPercent || "0") + "%",
         TaskCategory.Leisure + " " + (leisurePercent || "0") + "%",
       ]);
-    }, [store.toDoList, store.toDoList.length, date, sortedTasks]);
+    }, [store.toDoList, store.toDoList.length, date, sortedTasks, setCategory]);
 
     return (
       <Container>
@@ -79,7 +78,14 @@ const TaskDistribution = observer(
           <DoughnutChart labels={labels} data={data} />
         </ChartBox>
         {isMobile && category && (
-          <StatisticsCard text={statisticsInfoCards.second} value={category} />
+          <StatisticsCard
+            text={
+              category === "both"
+                ? statisticsInfoCards.equalTaskCategory
+                : statisticsInfoCards.taskCategory
+            }
+            value={category === "both" ? "" : category}
+          />
         )}
       </Container>
     );

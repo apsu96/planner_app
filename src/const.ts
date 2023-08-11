@@ -2,15 +2,17 @@ import moment from "moment";
 import { TimePeriod } from "./Store";
 
 export interface InfoCardsType {
-  first: string;
-  second: string;
-  third: string;
+  performance: string;
+  taskCategory: string;
+  equalTaskCategory: string;
+  emotion: string;
 }
 
 export const statisticsInfoCards: InfoCardsType = {
-  first: "Your tasks were completed by ",
-  second: "Most of the tasks you completed related to ",
-  third: "For most tasks you finished, you felt ",
+  performance: "Your tasks were completed by ",
+  taskCategory: "Most of the tasks you completed related to ",
+  equalTaskCategory: "You're equally active in work and leisure.",
+  emotion: "For most tasks you finished, you felt ",
 };
 
 export function getTargetDay(period: TimePeriod) {

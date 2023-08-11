@@ -1,5 +1,5 @@
 import React from "react";
-import { Emotions, TaskCategory, TimePeriod } from "../Store";
+import store, { TimePeriod } from "../Store";
 import { TaskFormLongColumnContainer } from "./TaskForm.styled";
 import {
   Container,
@@ -22,14 +22,14 @@ const StatisticsInfo = ({
   setTimePeriod,
   doneTasks,
   category,
-  emotion,
+  emotions,
   isMobile,
 }: {
   timePeriod: TimePeriod;
   setTimePeriod: React.Dispatch<React.SetStateAction<TimePeriod>>;
   doneTasks: string;
-  category: TaskCategory;
-  emotion: Emotions;
+  category: string | undefined;
+  emotions: string | undefined;
   isMobile: boolean;
 }) => {
   return (
@@ -58,12 +58,15 @@ const StatisticsInfo = ({
                     ? doneTasks
                     : keyName === "second"
                     ? category
-                    : emotion
+                    : emotions
                 }
               />
             ),
           )}
         </StatisticsCardsContainer>
+      )}
+      {store.toDoList.length === 0 && (
+        <Text>You haven&apos;t started planning any tasks yet.</Text>
       )}
     </Container>
   );
