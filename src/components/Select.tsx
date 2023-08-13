@@ -40,7 +40,9 @@ const Select = ({
   const ref = useRef<HTMLElement>(null);
 
   function handleResize() {
-    setBoxWidth(ref.current?.offsetWidth);
+    if (ref.current?.offsetWidth !== boxWidth) {
+      setBoxWidth(ref.current?.offsetWidth);
+    }
   }
 
   useEffect(() => {

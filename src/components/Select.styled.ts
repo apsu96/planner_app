@@ -88,8 +88,16 @@ export const CustomSelect = styledMui(Select)`
         max-width: ${({ timetype }: { timetype: string | undefined }) =>
           timetype === "true" ? "100%" : "unset"};
         margin: 0;
-        padding: ${({ variant }: { variant: string | undefined }) =>
-          variant === "taskForm"
+        padding: ${({
+          variant,
+          timetype,
+        }: {
+          variant: string | undefined;
+          timetype: string | undefined;
+        }) =>
+          variant === "taskForm" && timetype === "true"
+            ? "16px auto"
+            : variant === "taskForm"
             ? "16px 12px 16px 20px"
             : variant === "category"
             ? "0 0 0 5px"
@@ -180,7 +188,8 @@ export const OptionContainer = styled.ul`
   margin: 10px 0;
   padding: 0 5px;
   background-color: #f9f9f9;
-  width: 77px;
+  width: 80px;
+  margin-left: -7px;
   @media (max-width: 820px) {
     padding: 0 1Opx;
     margin: 0;
@@ -188,8 +197,12 @@ export const OptionContainer = styled.ul`
 `;
 
 export const CategoryOptionContainer = styled(OptionContainer)`
+  width: 90px;
+  margin-left: -9px;
+  padding: 20px auto;
   @media (max-width: 820px) {
-    width: 43px;
+    width: 60px;
+    margin-left: 0;
   }
 `;
 
@@ -202,17 +215,7 @@ export const OptionBox = styled(OptionContainer)`
   overflow-y: auto;
   width: auto;
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 50%;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #eeddea;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-    background-clip: padding-box;
+    display: none;
   }
 `;
 
@@ -271,11 +274,12 @@ export const CustomOption = styledMui(Option)`
     }: {
       variant: string | undefined;
       customwidth: number | undefined;
+      timetype: string | undefined;
     }) =>
-      customwidth && (variant === "taskLine" || variant === "hidden")
+      (customwidth && variant === "taskLine") || variant === "hidden"
         ? "50px"
         : customwidth
-        ? customwidth - 20 + "px"
+        ? customwidth + "px"
         : "auto"};
     padding-left: ${({
       variant,
@@ -285,10 +289,10 @@ export const CustomOption = styledMui(Option)`
       customwidth: number | undefined;
       timetype: string | undefined;
     }) =>
-      variant === "taskForm" && timetype === "true"
-        ? "12px"
-        : variant === "taskForm"
+      variant === "taskForm" && timetype !== "true"
         ? "20px"
+        : variant === "category"
+        ? "5px"
         : "0"};
     text-align: ${({
       timetype,
@@ -299,16 +303,43 @@ export const CustomOption = styledMui(Option)`
     }) => (timetype === "true" ? "center" : "left")};
     @media (min-width: 1441px) {
         font-size: 14px;
+        width: ${({
+          variant,
+          customwidth,
+        }: {
+          variant: string | undefined;
+          customwidth: number | undefined;
+          timetype: string | undefined;
+        }) =>
+          ((customwidth && variant === "taskLine") || variant === "hidden") &&
+          "70px"};
     }
     @media(max-width: 820px) {
       width: ${({
         variant,
+        customwidth,
       }: {
         variant: string | undefined;
         customwidth: number | undefined;
-      }) => (variant === "taskLine" || variant === "hidden") && "33px"};
+        timetype: string | undefined;
+      }) =>
+        variant === "taskLine" || variant === "hidden"
+          ? "33px"
+          : customwidth
+          ? customwidth + "px"
+          : "auto"};
+      padding-left: ${({
+        variant,
+        timetype,
+      }: {
+        variant: string | undefined;
+        customwidth: number | undefined;
+        timetype: string | undefined;
+      }) =>
+        ((variant === "taskForm" && timetype === "true") ||
+          variant === "category") &&
+        "0"};
     }
-
     &:hover {
         opacity: 0.8;
     }
