@@ -2,6 +2,7 @@
   "name": "planner_app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://apsu96.github.io/planner_app/",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -20,6 +21,7 @@
     "eslint-plugin-import": "^2.28.0",
     "eslint-plugin-prettier": "^5.0.0",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "gh-pages": "^6.0.0",
     "mobx": "^6.10.0",
     "mobx-react-lite": "^4.0.3",
     "moment": "^2.29.4",
@@ -41,7 +43,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint:fix": "eslint --fix .",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
