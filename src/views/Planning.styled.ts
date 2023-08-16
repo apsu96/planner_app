@@ -8,8 +8,6 @@ export const Container = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 30px;
   grid-column-gap: 20px;
-  flex-direction: column;
-  gap: 20px;
   box-sizing: border-box;
   @media (max-width: 1420px) {
     grid-template-columns: 1fr;

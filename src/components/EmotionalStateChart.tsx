@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import store, { Emotions, ToDoType } from "../Store";
 import DoughnutChart from "./DoughnutChart";
-import { ChartBox, Title } from "./UIKit.styled";
+import { ChartBox, Container, Title } from "./UIKit.styled";
 import moment from "moment";
 import { observer } from "mobx-react-lite";
 import StatisticsCard from "./StatisticsCard";
@@ -70,7 +70,7 @@ const EmotionalStateChart = observer(
     }, [store, store.toDoList, sortedTasks, setEmotion]);
 
     return (
-      <>
+      <Container>
         <Title>Emotional State Tracker</Title>
         <ChartBox>
           <DoughnutChart labels={labels} data={data} />
@@ -78,7 +78,7 @@ const EmotionalStateChart = observer(
         {isMobile && emotions && (
           <StatisticsCard text={statisticsInfoCards.emotion} value={emotions} />
         )}
-      </>
+      </Container>
     );
   },
 );

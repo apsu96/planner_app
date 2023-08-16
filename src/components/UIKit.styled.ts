@@ -68,7 +68,7 @@ export const Container = styled.div`
     min-width: 335px;
     padding: 20px;
   }
-  @media (max-width: 820px) {
+  @media (max-width: 1440px) {
     min-height: auto;
   }
 `;
@@ -317,11 +317,20 @@ export const ChartBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
+  position: relative;
+  width: 85%;
+  height: 70%;
+  margin: 40px auto;
   @media (min-width: 1441px) {
-    width: 70%;
+    width: 85%;
+    height: 70%;
+  }
+  @media (max-width: 1420px) {
+    height: 300px;
+  }
+  @media (max-width: 820px) {
+    margin: 30px auto;
+    width: 100%;
     height: 70%;
   }
 `;

@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import DoughnutChart from "./DoughnutChart";
-import { ChartBox, Title } from "./UIKit.styled";
+import { ChartBox, Container, Title } from "./UIKit.styled";
 import React, { useEffect, useState } from "react";
 import store, { ToDoType } from "../Store";
 import moment from "moment";
@@ -59,7 +59,7 @@ const TaskCompletionChart = observer(
       ]);
     }, [store, store.toDoList, sortedTasks, setDoneTasks]);
     return (
-      <>
+      <Container>
         <Title>Task Progress Tracker</Title>
         <ChartBox>
           <DoughnutChart labels={labels} data={data} />
@@ -70,7 +70,7 @@ const TaskCompletionChart = observer(
             value={doneTasks}
           />
         )}
-      </>
+      </Container>
     );
   },
 );

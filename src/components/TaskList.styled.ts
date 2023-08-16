@@ -8,7 +8,7 @@ import {
 } from "./UIKit.styled";
 
 export const TaskListContainer = styled(Container)`
-  height: 100%;
+  /* height: 100%; */
 `;
 
 export const TaskListBox = styled.div`

@@ -9,37 +9,25 @@ import {
 } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import type { Plugin } from "chart.js";
+import { useMediaQuery } from "@mui/material";
 
-const plugin: Plugin<"doughnut"> = {
-  id: "empty",
-  afterDraw(chart: ChartJS) {
-    const { datasets } = chart.data;
-    let totalSum = 0;
-    datasets.map((dataset) => {
-      dataset.data.map((val) => {
-        totalSum += Number(val);
-      });
-    });
-
-    if (totalSum == 0) {
-      const {
-        chartArea: { left, top, right, bottom },
-        ctx,
-      } = chart;
-      const centerX = (left + right) / 2;
-      const centerY = (top + bottom) / 2;
-      const r = Math.min(right - left, bottom - top) / 2;
-
-      ctx.beginPath();
-      ctx.fillStyle = "#f9f9f9";
-      ctx.arc(centerX, centerY, r, 0, 2 * Math.PI);
-      ctx.fill();
-
-      ctx.fillStyle = "#979797";
-      ctx.font = "14px 'OpenSans,sans-serif'";
-      ctx.fillText("Empty...", chart.width / 5, chart.height / 2);
+const customLegendPlugin: Plugin<"doughnut"> = {
+  id: "customLegend",
+  beforeDraw(chart) {
+    const {
+      chartArea: { left, top, right, bottom },
+      legend,
+    } = chart;
+    console.log(left, top, right, bottom);
+    console.log(chart);
+    if (legend?.left !== undefined || legend?.right !== undefined) {
+      console.log(legend.left, legend.top, legend.right, legend.bottom);
+      console.log(legend.width);
+      // legend.x = 100;
+      // legend.left = right;
     }
   },
+  // afterDraw(chart: ChartJS) {},
 };
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -63,19 +51,58 @@ const DoughnutChart = ({
     ],
   });
   const chartRef = useRef(null);
+  const isMobile = useMediaQuery("(max-width:820px)");
+
+  const emptyChartPlugin: Plugin<"doughnut"> = {
+    id: "empty",
+    afterDraw(chart: ChartJS) {
+      const { datasets } = chart.data;
+      let totalSum = 0;
+      datasets.map((dataset) => {
+        dataset.data.map((val) => {
+          totalSum += Number(val);
+        });
+      });
+
+      if (totalSum == 0) {
+        const {
+          chartArea: { left, top, right, bottom },
+          ctx,
+        } = chart;
+        const centerX = (left + right) / 2;
+        const centerY = (top + bottom) / 2;
+        const r = Math.min(right - left, bottom - top) / 2;
+
+        ctx.beginPath();
+        ctx.fillStyle = "#f9f9f9";
+        ctx.arc(centerX, centerY, r, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "white";
+        const cutout = isMobile ? 0.5 : 0.6;
+        ctx.arc(centerX, centerY, cutout * r, 0, 2 * Math.PI);
+        ctx.fill();
+      }
+    },
+  };
 
   const options: ChartOptions<"doughnut"> = {
-    cutout: 60,
+    cutout: isMobile ? "50%" : " 60%",
+    layout: {
+      autoPadding: false,
+    },
     plugins: {
       legend: {
         position: "right",
+        align: "center",
         labels: {
           usePointStyle: true,
           pointStyle: "circle",
-          padding: 37,
+          padding: isMobile ? 12 : 20,
           color: "#53514D",
           font: {
-            size: 14,
+            size: isMobile ? 12 : 14,
             family: "OpenSans, sans-serif",
             weight: "500",
           },
@@ -100,6 +127,7 @@ const DoughnutChart = ({
         },
       },
     },
+    maintainAspectRatio: false,
   };
   function getGradient(chart: {
     ctx: any;
@@ -144,7 +172,7 @@ const DoughnutChart = ({
       ref={chartRef}
       options={options}
       data={chartData}
-      plugins={[plugin]}
+      plugins={[emptyChartPlugin, customLegendPlugin]}
     />
   );
 };

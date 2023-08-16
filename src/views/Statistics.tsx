@@ -3,7 +3,6 @@ import TaskCompletionChart from "../components/TaskCompletionChart";
 import TaskDistribution from "../components/TaskDistribution";
 import EmotionalStateChart from "../components/EmotionalStateChart";
 import StatisticsInfo from "../components/StatisticsInfo";
-import { Container as UIContainer } from "../components/UIKit.styled";
 import { useEffect, useState } from "react";
 import store, { TimePeriod, ToDoType } from "../Store";
 import { getTargetDay } from "../const";
@@ -36,14 +35,12 @@ function Statistics() {
         emotions={emotions}
         isMobile={isMobile}
       />
-      <UIContainer>
-        <TaskCompletionChart
-          sortedTasks={sortedTasks}
-          doneTasks={doneTasks}
-          setDoneTasks={setDoneTasks}
-          isMobile={isMobile}
-        />
-      </UIContainer>
+      <TaskCompletionChart
+        sortedTasks={sortedTasks}
+        doneTasks={doneTasks}
+        setDoneTasks={setDoneTasks}
+        isMobile={isMobile}
+      />
       <TaskDistribution
         date={new Date()}
         sortedTasks={sortedTasks}
@@ -51,14 +48,12 @@ function Statistics() {
         setCategory={setCategory}
         isMobile={isMobile}
       />
-      <UIContainer>
-        <EmotionalStateChart
-          sortedTasks={sortedTasks}
-          emotions={emotions}
-          setEmotion={setEmotions}
-          isMobile={isMobile}
-        />
-      </UIContainer>
+      <EmotionalStateChart
+        sortedTasks={sortedTasks}
+        emotions={emotions}
+        setEmotion={setEmotions}
+        isMobile={isMobile}
+      />
     </Container>
   );
 }
