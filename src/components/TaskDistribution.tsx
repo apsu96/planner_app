@@ -81,10 +81,10 @@ const TaskDistribution = observer(
           <StatisticsCard
             text={
               category === "both"
-                ? statisticsInfoCards.equalTaskCategory
-                : statisticsInfoCards.taskCategory
+                ? statisticsInfoCards.taskCategory.equalText
+                : statisticsInfoCards.taskCategory.text
             }
-            value={category === "both" ? "" : category}
+            value={category === "both" ? " " : category}
           />
         )}
       </Container>

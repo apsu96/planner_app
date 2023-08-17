@@ -12,7 +12,7 @@ import { useMediaQuery } from "@mui/material";
 function Statistics() {
   const [timePeriod, setTimePeriod] = useState(TimePeriod.LastWeek);
   const [sortedTasks, setSortedTasks] = useState<ToDoType[]>([]);
-  const [doneTasks, setDoneTasks] = useState<string>("");
+  const [doneTasks, setDoneTasks] = useState<string | undefined>(undefined);
   const [category, setCategory] = useState<string | undefined>(undefined);
   const [emotions, setEmotions] = useState<string | undefined>(undefined);
   const isMobile = useMediaQuery("(max-width:820px)");

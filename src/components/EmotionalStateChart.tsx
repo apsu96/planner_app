@@ -76,7 +76,10 @@ const EmotionalStateChart = observer(
           <DoughnutChart labels={labels} data={data} />
         </ChartBox>
         {isMobile && emotions && (
-          <StatisticsCard text={statisticsInfoCards.emotion} value={emotions} />
+          <StatisticsCard
+            text={statisticsInfoCards.emotion.text}
+            value={emotions}
+          />
         )}
       </Container>
     );

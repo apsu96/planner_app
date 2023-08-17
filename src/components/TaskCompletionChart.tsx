@@ -16,7 +16,7 @@ const TaskCompletionChart = observer(
   }: {
     sortedTasks?: ToDoType[];
     doneTasks?: string;
-    setDoneTasks?: React.Dispatch<React.SetStateAction<string>>;
+    setDoneTasks?: React.Dispatch<React.SetStateAction<string | undefined>>;
     isMobile?: boolean;
   }) => {
     const [data, setData] = useState<number[]>([]);
@@ -50,7 +50,7 @@ const TaskCompletionChart = observer(
           ? Math.round((done * 100) / totalEstimatedTime)
           : 0;
       if (setDoneTasks) {
-        setDoneTasks((workPercent || 0) + "%");
+        setDoneTasks(workPercent ? workPercent + "%" : undefined);
       }
       const toBeDonePercent = totalEstimatedTime !== 0 ? 100 - workPercent : 0;
       setLabels([
@@ -66,7 +66,7 @@ const TaskCompletionChart = observer(
         </ChartBox>
         {isMobile && doneTasks && (
           <StatisticsCard
-            text={statisticsInfoCards.performance}
+            text={statisticsInfoCards.performance.text}
             value={doneTasks}
           />
         )}

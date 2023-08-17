@@ -21,13 +21,15 @@ export function timeRange(firstVal: number, endVal: number) {
 }
 
 export function compareEmotions(data: number[]) {
-  const finalData: Emotions[] = [];
+  let finalData: Emotions[] = [];
   let bigValue: number = 0;
   const emotions = Object.values(Emotions);
   data.map((value, index) => {
-    if (value > 0 && value >= bigValue) {
-      finalData.push(emotions[index]);
+    if (value > 0 && value > bigValue) {
+      finalData = [emotions[index]];
       bigValue = value;
+    } else if (value !== 0 && value === bigValue) {
+      finalData.push(emotions[index]);
     }
   });
   if (finalData.length === 0) {
@@ -44,6 +46,6 @@ export function compareTaskCategory(data: number[]) {
   } else if (data[0] === data[1]) {
     return "both";
   } else {
-    data[0] > data[1] ? categories[0] : categories[1];
+    return data[0] > data[1] ? categories[0] : categories[1];
   }
 }

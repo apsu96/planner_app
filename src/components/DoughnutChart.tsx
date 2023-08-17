@@ -11,25 +11,6 @@ import { Doughnut } from "react-chartjs-2";
 import type { Plugin } from "chart.js";
 import { useMediaQuery } from "@mui/material";
 
-const customLegendPlugin: Plugin<"doughnut"> = {
-  id: "customLegend",
-  beforeDraw(chart) {
-    const {
-      chartArea: { left, top, right, bottom },
-      legend,
-    } = chart;
-    console.log(left, top, right, bottom);
-    console.log(chart);
-    if (legend?.left !== undefined || legend?.right !== undefined) {
-      console.log(legend.left, legend.top, legend.right, legend.bottom);
-      console.log(legend.width);
-      // legend.x = 100;
-      // legend.left = right;
-    }
-  },
-  // afterDraw(chart: ChartJS) {},
-};
-
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const DoughnutChart = ({
@@ -172,7 +153,7 @@ const DoughnutChart = ({
       ref={chartRef}
       options={options}
       data={chartData}
-      plugins={[emptyChartPlugin, customLegendPlugin]}
+      plugins={[emptyChartPlugin]}
     />
   );
 };
