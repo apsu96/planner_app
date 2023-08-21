@@ -102,8 +102,12 @@ export const CustomSelect = styledMui(Select)`
             : variant === "category"
             ? "0 0 0 5px"
             : "0"};
-            height: ${({ variant }: { variant: string | undefined }) =>
-              variant === "hidden" ? "17px" : "none"};
+        height: ${({ variant }: { variant: string | undefined }) =>
+          variant === "hidden"
+            ? "17px"
+            : variant === undefined
+            ? "24px"
+            : "none"};
     }
     ::after {
         content: ${({

@@ -13,7 +13,7 @@ export const PageContainer = styled.div`
   flex-direction: column;
   align-items: center;
   padding: ${({ isMobile }: { isMobile: boolean }) =>
-    isMobile ? "68px 20px 40px" : "40px 40px 40px 30px"};
+    isMobile ? "68px 12px 40px" : "40px 40px 40px 30px"};
   gap: ${({ isMobile }: { isMobile: boolean }) => (isMobile ? "20px" : "28px")};
   width: calc(100vw - 242px);
   height: 100vh;
@@ -66,7 +66,7 @@ export const Container = styled.div`
   flex-direction: column;
   @media (max-width: 1420px) {
     min-width: 335px;
-    padding: 20px;
+    padding: 20px 12px;
   }
   @media (max-width: 1440px) {
     min-height: auto;
@@ -182,11 +182,14 @@ export const LargeButton = styled.button`
 
 export const SmallButton = styled(LargeButton)`
   padding: 0px 16px;
-  height: 24px;
+  height: 40px;
   font-size: 12px;
   @media (min-width: 1441px) {
     font-size: 14px;
     height: 40px;
+  }
+  @media (max-width: 820px) {
+    height: 24px;
   }
 `;
 
@@ -195,7 +198,7 @@ export const IconWrapperButton = styled.button`
   margin: 0;
   padding: 0;
   width: auto;
-  height: 30px;
+  height: 23px;
   outline: 0;
   border: none;
   text-align: center;
@@ -265,6 +268,9 @@ export const TaskLineContainer = styled.div`
   box-sizing: border-box;
   align-items: center;
   width: 97%;
+  @media (max-width: 820px) {
+    width: 100%;
+  }
 `;
 
 export const MoveButton = styled.div`
@@ -337,7 +343,9 @@ export const ChartBox = styled.div`
   }
 `;
 
-export const CategoryContainer = styled.div``;
+export const CategoryContainer = styled.div`
+  height: 24px;
+`;
 
 export const TimeContainer = styled.div`
   display: flex;

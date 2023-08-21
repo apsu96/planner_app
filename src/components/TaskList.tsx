@@ -1,8 +1,8 @@
-import { SmallText, Title } from "./UIKit.styled";
+import { SmallText, Title, Container } from "./UIKit.styled";
 import moment from "moment";
 import store from "../Store";
 import uuid from "react-uuid";
-import { TaskListBox, TaskListContainer } from "./TaskList.styled";
+import { TaskListBox } from "./TaskList.styled";
 import Task from "./Task";
 import NoTask from "./NoTask";
 
@@ -11,7 +11,7 @@ const TaskList = () => {
     (toDo) => toDo.date === moment().format("LL"),
   );
   return (
-    <TaskListContainer>
+    <Container>
       <Title>{moment().format("LL")}</Title>
       <SmallText>{moment().format("dddd")}</SmallText>
       <TaskListBox>
@@ -22,7 +22,7 @@ const TaskList = () => {
           ) : null,
         )}
       </TaskListBox>
-    </TaskListContainer>
+    </Container>
   );
 };
 

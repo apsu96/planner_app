@@ -1,15 +1,10 @@
 import styled from "styled-components";
 import {
   BadgesContainer,
-  Container,
   SmallButton,
   TaskLineContainer,
   Text,
 } from "./UIKit.styled";
-
-export const TaskListContainer = styled(Container)`
-  /* height: 100%; */
-`;
 
 export const TaskListBox = styled.div`
   display: flex;
