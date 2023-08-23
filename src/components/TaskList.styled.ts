@@ -39,6 +39,11 @@ export const TaskInfoContainer = styled.div`
   flex-direction: column;
   p {
     margin: 0;
+    word-break: break-all;
+  }
+  width: calc(100% - 330px);
+  @media (max-width: 820px) {
+    width: calc(100% - 200px);
   }
 `;
 

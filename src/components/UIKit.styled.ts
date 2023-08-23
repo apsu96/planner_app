@@ -112,16 +112,21 @@ export const Input = styled.input`
   border: none;
   width: 100%;
   box-sizing: border-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
   @media (min-width: 1441px) {
     font-size: 16px;
   }
 `;
 
 export const TaskLineInput = styled(Input)`
-  width: 50%;
+  width: calc(100% - 250px);
   padding: 0;
   @media (min-width: 1441px) {
-    width: auto;
+    width: calc(100% - 270px);
+  }
+  @media (max-width: 820px) {
+    width: calc(100% - 190px);
   }
 `;
 
@@ -275,14 +280,13 @@ export const TaskLineContainer = styled.div`
 
 export const MoveButton = styled.div`
   min-width: 3px;
-  height: 28px;
+  height: 100%;
   background-color: #aa84a1;
   margin-right: 17px;
 `;
 
 export const LongMoveButton = styled(MoveButton)`
   min-height: 80px;
-  height: 100%;
   margin: 0 17px 0 0;
   @media (max-width: 820px) {
     min-height: 40px;
@@ -317,7 +321,7 @@ export const BadgesContainer = styled.div`
   display: flex;
   gap: 15px;
   align-items: center;
-  min-width: 201px;
+  min-width: 160px;
   justify-content: flex-end;
 `;
 
