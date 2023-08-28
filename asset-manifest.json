@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/planner_app/static/css/main.0c7694fc.css",
-    "main.js": "/planner_app/static/js/main.63108abd.js",
+    "main.js": "/planner_app/static/js/main.5798619e.js",
     "static/media/OpenSans.ttf": "/planner_app/static/media/OpenSans.d7d7b8359eeb9cddfba6.ttf",
     "static/media/OpenSans-SemiBold.ttf": "/planner_app/static/media/OpenSans-SemiBold.2f17aae884058c5a85df.ttf",
     "static/media/OpenSans.woff": "/planner_app/static/media/OpenSans.6f6541140f45c8410bb8.woff",
@@ -11,10 +11,10 @@
     "index.html": "/planner_app/index.html",
     "static/media/TimeIcon.svg": "/planner_app/static/media/TimeIcon.90b4bb4ea7a4a755e85a1eff06256a0f.svg",
     "main.0c7694fc.css.map": "/planner_app/static/css/main.0c7694fc.css.map",
-    "main.63108abd.js.map": "/planner_app/static/js/main.63108abd.js.map"
+    "main.5798619e.js.map": "/planner_app/static/js/main.5798619e.js.map"
   },
   "entrypoints": [
     "static/css/main.0c7694fc.css",
-    "static/js/main.63108abd.js"
+    "static/js/main.5798619e.js"
   ]
 }
