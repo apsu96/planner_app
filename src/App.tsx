@@ -1,9 +1,8 @@
 import { Routes, Route, useLocation } from "react-router-dom";
-import Profile from "./components/Profile";
 import Planning from "./views/Planning";
 import Statistics from "./views/Statistics";
 import MyDay from "./views/MyDay";
-import Drawer from "@mui/material/Drawer";
+
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
 import MenuIcon from "./images/MenuIcon.png";
@@ -18,9 +17,16 @@ import {
   PageTitleContainer,
 } from "./components/UIKit.styled";
 import store from "./Store";
+import Drawer from "./components/Drawer";
+
+export interface ViewType {
+  planning: boolean;
+  myDay: boolean;
+  statistics: boolean;
+}
 
 function App() {
-  const [currentView, setCurrentView] = useState({
+  const [currentView, setCurrentView] = useState<ViewType>({
     planning: true,
     myDay: false,
     statistics: false,
@@ -81,31 +87,12 @@ function App() {
   return (
     <AppContainer>
       <Drawer
-        variant="temporary"
-        open={isDrawerOpen}
-        ModalProps={{
-          keepMounted: true,
-        }}
-        sx={{ display: isMobile ? "block" : "none" }}
-        onClose={toggleMenu}
-      >
-        <Profile
-          currentView={currentView}
-          isMobile={true}
-          toggleMenu={toggleMenu}
-        />
-      </Drawer>
-      <Drawer
-        variant="permanent"
-        open={!isMobile}
-        sx={{ display: !isMobile ? "block" : "none", width: "242px" }}
-      >
-        <Profile
-          currentView={currentView}
-          isMobile={false}
-          toggleMenu={toggleMenu}
-        />
-      </Drawer>
+        isMobile={isMobile}
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        toggleMenu={toggleMenu}
+        currentView={currentView}
+      />
       <PageContainer isMobile={isMobile}>
         {isMobile ? (
           <MobileMenuContainer>
